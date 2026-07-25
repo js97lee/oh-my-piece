@@ -33,4 +33,8 @@ npm run dev
 4. Vercel Production/Preview 환경변수:
    - `VITE_KAKAO_REST_API_KEY`
    - `KAKAO_REST_API_KEY` (토큰 교환 API용, 값은 REST API 키와 동일)
+   - `KAKAO_CLIENT_SECRET` (콘솔에서 Client Secret이 ON이면 필수)
 5. Redirect URI는 기본으로 `${현재 origin}/mypage`를 사용하므로 로컬과 배포 도메인이 각각 자동 적용됩니다.
+6. `Bad client credentials`가 뜨면 REST API 키의 **클라이언트 시크릿**이 ON인데 시크릿이 없는 상태입니다.
+   - 콘솔에서 Client Secret을 OFF로 바꾸거나
+   - 발급된 시크릿 코드를 `KAKAO_CLIENT_SECRET`에 넣고 재배포하세요.

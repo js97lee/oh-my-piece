@@ -53,6 +53,10 @@ function kakaoTokenMiddleware(env) {
         code,
       });
 
+      if (env.KAKAO_CLIENT_SECRET) {
+        body.set("client_secret", env.KAKAO_CLIENT_SECRET);
+      }
+
       const response = await fetch("https://kauth.kakao.com/oauth/token", {
         method: "POST",
         headers: {

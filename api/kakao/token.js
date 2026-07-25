@@ -31,6 +31,11 @@ export default async function handler(req, res) {
       code,
     });
 
+    const clientSecret = process.env.KAKAO_CLIENT_SECRET;
+    if (clientSecret) {
+      tokenBody.set("client_secret", clientSecret);
+    }
+
     const response = await fetch("https://kauth.kakao.com/oauth/token", {
       method: "POST",
       headers: {

@@ -126,7 +126,13 @@ export async function completeKakaoLoginFromCallback(searchParams) {
 
   const payload = await response.json().catch(() => ({}));
   if (!response.ok || !payload.access_token) {
-    throw new Error(payload.error_description || payload.error || "카카오 토큰 발급에 실패했습니다.");
+    const description = payload.error_description || payload.error || "";
+    if (/bad client credentials|invalid_client|koe010/i.test(description)) {
+      throw new Error(
+        "카카오 클라이언트 인증에 실패했습니다. 개발자 콘솔에서 Client Secret을 끄거나, 시크릿 값을 서버 환경변수에 넣어 주세요.",
+      );
+    }
+    throw new Error(description || "카카오 토큰 발급에 실패했습니다.");
   }
 
   const profile = await fetchKakaoProfile(payload.access_token);

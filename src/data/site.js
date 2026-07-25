@@ -10,7 +10,6 @@ export const heroBanners = [
 
 export const flowSteps = [
   { icon: "book", title: "콘텐츠 선택", description: "관심 있는 콘텐츠 구독권을 고릅니다." },
-  { icon: "chat", title: "카카오싱크 가입", description: "약관 동의와 채널 추가를 한 번에 진행합니다." },
   { icon: "clock", title: "발송 시간 설정", description: "원하는 요일과 시간을 선택합니다." },
   { icon: "send", title: "샘플 즉시 발송", description: "첫 콘텐츠를 카카오톡으로 바로 받아봅니다." },
 ];
