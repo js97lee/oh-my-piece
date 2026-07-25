@@ -8,6 +8,7 @@ import MyPage from "./pages/MyPage";
 import NoticesPage from "./pages/NoticesPage";
 import { PrivacyPage, TermsPage } from "./pages/PolicyPage";
 import PurchasePage from "./pages/PurchasePage";
+import SignupPage from "./pages/SignupPage";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
       <Route path="/notices" element={<NoticesPage />} />
       <Route path="/FAQ" element={<FaqPage />} />
       <Route path="/mypage" element={<MyPage />} />
+      <Route path="/signup" element={<SignupPage />} />
       <Route path="/subscriptions" element={<SubscriptionPage />} />
       <Route path="/coupons" element={<MemberUtilityPage title="쿠폰함" description="보유 중인 쿠폰과 사용 기간을 확인해요." />} />
       <Route path="/payments" element={<MemberUtilityPage title="결제 내역" description="구독과 선물 결제 내역을 확인해요." />} />

@@ -67,7 +67,21 @@ export default function MyPage() {
         {loginError ? <p className="mypage-description">{loginError}</p> : null}
       </section>
       <section className="mypage-actions">
-        {!isAuthenticated && !isCompletingLogin ? <KakaoLoginButton /> : null}
+        {!isAuthenticated && !isCompletingLogin ? (
+          <div className="mypage-auth-buttons">
+            <Link
+              className="signup-button"
+              to={
+                searchParams.get("returnTo")
+                  ? `/signup?returnTo=${encodeURIComponent(searchParams.get("returnTo"))}`
+                  : "/signup"
+              }
+            >
+              회원가입하기
+            </Link>
+            <KakaoLoginButton />
+          </div>
+        ) : null}
         <small>
           로그인 시 <Link to="/policies/terms">이용약관</Link> 및 <Link to="/policies/privacy">개인정보처리방침</Link>에
           <br />

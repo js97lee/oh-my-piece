@@ -4,6 +4,7 @@ import {
   isKakaoAuthenticated,
   subscribeAuthChange,
 } from "../services/kakaoAuth";
+import { clearLocalMember, isLocalAuthenticated } from "../services/localAuth";
 
 const PREVIEW_KEY = "oh_my_piece_preview_member";
 const PREVIEW_EVENT = "oh-my-piece-auth-preview";
@@ -19,11 +20,12 @@ export function setAuthPreview(isAuthenticated) {
 
 export function logoutAuth() {
   clearKakaoSession();
+  clearLocalMember();
   setAuthPreview(false);
 }
 
 function getAuthState() {
-  return isKakaoAuthenticated() || getPreviewState();
+  return isKakaoAuthenticated() || isLocalAuthenticated() || getPreviewState();
 }
 
 export function useAuthPreview() {

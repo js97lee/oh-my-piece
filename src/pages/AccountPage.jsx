@@ -3,6 +3,47 @@ import { Navigate, useNavigate } from "react-router-dom";
 import MobilePageShell from "../components/layout/MobilePageShell";
 import { logoutAuth, useAuthPreview } from "../hooks/useAuthPreview";
 import { getKakaoSession, syncKakaoProfile } from "../services/kakaoAuth";
+import { getLocalMember } from "../services/localAuth";
+
+const SUBJECT_LABELS = {
+  english: "영어",
+  math: "수학",
+};
+
+const LEVEL_LABELS = {
+  basic: "下",
+  middle: "中",
+  high: "上",
+};
+
+const GOAL_LABELS = {
+  review: "단기 복습",
+  habit: "꾸준한 습관",
+  exam: "시험 대비",
+  basics: "기초 다지기",
+};
+
+const GENDER_LABELS = {
+  male: "남",
+  female: "여",
+};
+
+const AGE_LABELS = {
+  under10: "10세 미만",
+  "10s": "10대",
+  "20s": "20대",
+  "30s": "30대",
+  "40s": "40대",
+  "50plus": "50대 이상",
+};
+
+const ACADEMIC_LABELS = {
+  elementary: "초등",
+  middle: "중등",
+  high: "고등",
+  adult: "대학·성인",
+  other: "기타",
+};
 
 function formatConnectedDate(timestamp) {
   if (!timestamp) {
@@ -23,10 +64,25 @@ function KakaoTalkIcon() {
   );
 }
 
+function formatOptionalSummary(profile) {
+  const parts = [
+    GENDER_LABELS[profile.gender],
+    AGE_LABELS[profile.ageGroup],
+    ACADEMIC_LABELS[profile.academicLevel],
+    (profile.preferredSubjects || []).map((item) => SUBJECT_LABELS[item]).filter(Boolean).join("·"),
+    LEVEL_LABELS[profile.level],
+    GOAL_LABELS[profile.learningGoal],
+  ].filter(Boolean);
+
+  return parts.length ? parts.join(" / ") : "미입력";
+}
+
 export default function AccountPage() {
   const isAuthenticated = useAuthPreview();
   const navigate = useNavigate();
-  const [session, setSession] = useState(() => getKakaoSession());
+  const [kakaoSession, setKakaoSession] = useState(() => getKakaoSession());
+  const localMember = getLocalMember();
+  const isKakaoMember = Boolean(kakaoSession?.accessToken);
   const [isSyncing, setIsSyncing] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -34,14 +90,20 @@ export default function AccountPage() {
     return <Navigate to="/mypage?returnTo=/account" replace />;
   }
 
-  const profile = session?.profile || {};
+  const profile = isKakaoMember ? kakaoSession?.profile || {} : localMember?.profile || {};
+  const connectedAt = isKakaoMember ? kakaoSession?.connectedAt : localMember?.connectedAt;
 
   const handleSync = async () => {
+    if (!isKakaoMember) {
+      setMessage("일반 회원은 동기화가 필요하지 않아요.");
+      return;
+    }
+
     setIsSyncing(true);
     setMessage("");
     try {
       await syncKakaoProfile();
-      setSession(getKakaoSession());
+      setKakaoSession(getKakaoSession());
       setMessage("계정 정보를 동기화했어요.");
     } catch (error) {
       setMessage(error.message || "동기화에 실패했습니다.");
@@ -73,20 +135,32 @@ export default function AccountPage() {
       <section className="account-section">
         <div className="account-section-head">
           <div>
-            <h2>메신저</h2>
-            <p>콘텐츠를 받을 메신저 연결 상태입니다.</p>
+            <h2>{isKakaoMember ? "메신저" : "가입 방식"}</h2>
+            <p>
+              {isKakaoMember
+                ? "콘텐츠를 받을 메신저 연결 상태입니다."
+                : "이메일·전화번호로 가입한 일반 회원입니다."}
+            </p>
           </div>
-          <button className="account-sync-button" type="button" onClick={handleSync} disabled={isSyncing}>
-            <span aria-hidden="true">↻</span>
-            {isSyncing ? "동기화 중" : "동기화"}
-          </button>
+          {isKakaoMember ? (
+            <button className="account-sync-button" type="button" onClick={handleSync} disabled={isSyncing}>
+              <span aria-hidden="true">↻</span>
+              {isSyncing ? "동기화 중" : "동기화"}
+            </button>
+          ) : null}
         </div>
         <article className="account-card account-messenger-card">
           <div className="account-messenger-main">
-            <KakaoTalkIcon />
+            {isKakaoMember ? (
+              <KakaoTalkIcon />
+            ) : (
+              <span className="account-local-icon" aria-hidden="true">
+                {(profile.name || "?").slice(0, 1)}
+              </span>
+            )}
             <div>
-              <strong>카카오톡</strong>
-              <small>{formatConnectedDate(session?.connectedAt)}</small>
+              <strong>{isKakaoMember ? "카카오톡" : "일반 회원"}</strong>
+              <small>{formatConnectedDate(connectedAt)}</small>
             </div>
           </div>
           <span className="account-connected-badge">✓ 연결됨</span>
@@ -127,6 +201,12 @@ export default function AccountPage() {
             <span>전화번호</span>
             <strong>{profile.phoneNumber || "미제공"}</strong>
           </div>
+          {!isKakaoMember ? (
+            <div>
+              <span>학습 프로필</span>
+              <strong>{formatOptionalSummary(profile)}</strong>
+            </div>
+          ) : null}
         </article>
         {message ? <p className="account-message">{message}</p> : null}
       </section>
