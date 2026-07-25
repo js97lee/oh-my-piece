@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const PREVIEW_KEY = "daily_piece_preview_member";
-const PREVIEW_EVENT = "daily-piece-auth-preview";
+const PREVIEW_KEY = "oh_my_piece_preview_member";
+const PREVIEW_EVENT = "oh-my-piece-auth-preview";
 
 function getPreviewState() {
   return window.localStorage.getItem(PREVIEW_KEY) === "true";

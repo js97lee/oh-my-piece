@@ -13,9 +13,9 @@ export function BrandLogo() {
 
 export function BrandLink({ className = "", onClick }) {
   return (
-    <Link className={`brand ${className}`.trim()} to="/" onClick={onClick} aria-label="데일리피스 홈">
+    <Link className={`brand ${className}`.trim()} to="/" onClick={onClick} aria-label="오마이피스 홈">
       <BrandLogo />
-      데일리피스
+      오마이피스
     </Link>
   );
 }

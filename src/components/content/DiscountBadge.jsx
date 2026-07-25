@@ -1,3 +1,3 @@
-export default function DiscountBadge({ value }) {
-  return <span className="discount-badge">{value}</span>;
+export default function DiscountBadge({ value, tone }) {
+  return <span className={`discount-badge discount-badge--${tone}`}>{value}</span>;
 }

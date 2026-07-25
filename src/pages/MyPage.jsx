@@ -23,7 +23,7 @@ export default function MyPage() {
       <section className="mypage-content">
         <h1 className="mypage-title-light">매일 카톡으로 받는</h1>
         <h1>지식 콘텐츠</h1>
-        <p className="mypage-brand">데일리피스</p>
+        <p className="mypage-brand">오마이피스</p>
         <p className="mypage-description">
           연간 구독 한 번으로, 하루 10분씩
           <br />

@@ -30,7 +30,7 @@ export default function SiteFooter() {
       {footerSections.map((section) => (
         <FooterSection section={section} key={section.title} />
       ))}
-      <p className="footer-copyright">© 2026 데일리피스. All rights reserved.</p>
+      <p className="footer-copyright">© 2026 오마이피스. All rights reserved.</p>
     </footer>
   );
 }

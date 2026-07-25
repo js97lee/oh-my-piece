@@ -1,11 +1,11 @@
-import heroBannerTwo from "../../assets/hero-banner-2.png";
-import heroBannerThree from "../../assets/hero-banner-3.png";
-import heroBannerOne from "../../assets/hero-banner.png";
+import heroBannerTwo from "../../assets/hero-banner-2.jpg";
+import heroBannerThree from "../../assets/hero-banner-3.jpg";
+import heroBannerOne from "../../assets/hero-banner.jpg";
 
 export const heroBanners = [
-  { src: heroBannerOne, alt: "데일리피스 상단 배너 1" },
-  { src: heroBannerTwo, alt: "데일리피스 상단 배너 2" },
-  { src: heroBannerThree, alt: "데일리피스 상단 배너 3" },
+  { src: heroBannerOne, alt: "오마이피스 상단 배너 1" },
+  { src: heroBannerTwo, alt: "오마이피스 상단 배너 2" },
+  { src: heroBannerThree, alt: "오마이피스 상단 배너 3" },
 ];
 
 export const flowSteps = [
@@ -54,10 +54,22 @@ export const footerSections = [
   {
     title: "고객센터",
     open: true,
-    lines: ["카카오톡 친구추가 : 데일리피스", "평일 10:00 - 18:00", "점심 12:00 - 13:00", "주말/공휴일 휴무"],
+    lines: [
+      "카카오톡 친구추가 : 오마이피스",
+      "이메일 : studio.realday@gmail.com",
+      "평일 10:00 - 18:00",
+      "점심 12:00 - 13:00",
+      "주말/공휴일 휴무",
+    ],
   },
   {
     title: "사업자 정보",
-    lines: ["파이랩 | 대표 : 김동학", "사업자등록번호 : 120-27-02110", "통신판매업신고 :", "전화 : 070-0000-0000", "서울특별시 서초구 매헌로16길 40, 203동 2002호"],
+    lines: [
+      "리얼데이 | 대표 : 이지수",
+      "사업자등록번호 : 146-11-03027",
+      "통신판매업신고 : 제2025-서울광진-1581호",
+      "이메일 : studio.realday@gmail.com",
+      "서울특별시 광진구 아차산로27길 29, B01",
+    ],
   },
 ];

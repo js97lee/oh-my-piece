@@ -10,7 +10,7 @@ export default function CourseCard({ content }) {
       <Link className="course-card-link" to={`/contents/${content.slug}`} aria-label={`${content.title} 상세보기`}>
         <div className="course-cover">
           <img src={content.image} alt="" loading="lazy" />
-          <DiscountBadge value={content.discount} />
+          <DiscountBadge value={content.discount} tone={content.level} />
           <strong>
             {titleLines.map((line, index) => (
               <span className={index === 0 ? "cover-title-light" : undefined} key={line}>

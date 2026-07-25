@@ -72,6 +72,18 @@
   font-weight: 900;
 }
 
+.discount-badge--high {
+  background: #8f3d16;
+}
+
+.discount-badge--middle {
+  background: #c87824;
+}
+
+.discount-badge--basic {
+  background: #5f7d68;
+}
+
 .course-body {
   padding: 13px 14px 16px;
 }
@@ -136,7 +148,10 @@
 
 .detail-summary,
 .detail-benefits,
-.detail-recommendations {
+.detail-routine,
+.detail-weekly-plan,
+.detail-recommendations,
+.detail-subscription-guide {
   padding-right: var(--page-padding-x);
   padding-left: var(--page-padding-x);
 }
@@ -204,7 +219,10 @@
 }
 
 .detail-benefits h2,
-.detail-recommendations h2 {
+.detail-routine h2,
+.detail-weekly-plan h2,
+.detail-recommendations h2,
+.detail-subscription-guide h2 {
   margin: 0 0 12px;
   font-size: 17px;
 }
@@ -256,7 +274,8 @@
 
 .detail-recommendations {
   padding-top: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-line);
 }
 
 .detail-recommendations ul {
@@ -270,6 +289,123 @@
   border-radius: var(--radius-sm);
   font-size: 12px;
   font-weight: 700;
+}
+
+.detail-routine {
+  padding-top: 22px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.detail-routine ol {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.detail-routine li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.detail-routine li > span {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  color: #fff;
+  background: var(--color-brand);
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.detail-routine strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 13px;
+}
+
+.detail-routine p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.detail-weekly-plan {
+  padding-top: 22px;
+  padding-bottom: 24px;
+  background: var(--color-surface-warm);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.detail-weekly-plan ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.detail-weekly-plan li {
+  padding: 10px;
+  color: var(--color-brown-800);
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.detail-weekly-plan li:last-child {
+  grid-column: 1 / -1;
+}
+
+.detail-subscription-guide {
+  padding-top: 22px;
+  padding-bottom: 34px;
+}
+
+.detail-subscription-guide dl {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 14px;
+  background: var(--color-surface-warm);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+.detail-subscription-guide dl div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.detail-subscription-guide dt {
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.detail-subscription-guide dd {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 900;
+  text-align: right;
+}
+
+.detail-subscription-guide > p {
+  margin: 11px 2px 0;
+  color: var(--color-muted);
+  font-size: 10px;
+  line-height: 1.55;
 }
 
 .subscribe-floating {

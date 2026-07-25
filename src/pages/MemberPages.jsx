@@ -50,7 +50,7 @@ export function MemberUtilityPage({ title, description }) {
       </header>
       <section className="member-empty-state">
         <strong>아직 표시할 내역이 없어요.</strong>
-        <p>데일리피스를 이용하면 이곳에서 한눈에 확인할 수 있습니다.</p>
+        <p>오마이피스를 이용하면 이곳에서 한눈에 확인할 수 있습니다.</p>
       </section>
     </MobilePageShell>
   );
