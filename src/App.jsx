@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import AccountPage from "./pages/AccountPage";
 import ContentDetailPage from "./pages/ContentDetailPage";
 import FaqPage from "./pages/FaqPage";
 import LandingPage from "./pages/LandingPage";
@@ -18,7 +19,7 @@ export default function App() {
       <Route path="/subscriptions" element={<SubscriptionPage />} />
       <Route path="/coupons" element={<MemberUtilityPage title="쿠폰함" description="보유 중인 쿠폰과 사용 기간을 확인해요." />} />
       <Route path="/payments" element={<MemberUtilityPage title="결제 내역" description="구독과 선물 결제 내역을 확인해요." />} />
-      <Route path="/account" element={<MemberUtilityPage title="계정" description="내 정보와 서비스 설정을 관리해요." />} />
+      <Route path="/account" element={<AccountPage />} />
       <Route path="/gifts" element={<GiftPage />} />
       <Route path="/gifts/sent" element={<GiftHistoryPage type="sent" />} />
       <Route path="/gifts/received" element={<GiftHistoryPage type="received" />} />

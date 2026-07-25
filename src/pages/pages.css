@@ -56,50 +56,212 @@
   text-decoration: underline;
 }
 
-.developer-mode {
+.account-page {
+  padding: 28px var(--page-padding-x) 48px;
+  background: #f3f4f6;
+}
+
+.account-page-header {
+  margin-bottom: 22px;
+}
+
+.account-page-header h1 {
+  margin: 0;
+  color: #111827;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.account-section {
+  margin-bottom: 28px;
+}
+
+.account-section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.account-section-head h2 {
+  margin: 0 0 4px;
+  color: #111827;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.account-section-head p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.account-sync-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  color: #374151;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.account-sync-button:disabled {
+  opacity: 0.6;
+}
+
+.account-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.account-messenger-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 18px;
-  padding: 11px 12px;
-  background: var(--color-surface-warm);
-  border: 1px dashed var(--color-brown-200);
-  border-radius: var(--radius-sm);
-  text-align: left;
+  padding: 16px;
 }
 
-.developer-mode > span,
-.developer-mode strong,
-.developer-mode small {
+.account-messenger-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.account-messenger-main strong,
+.account-messenger-main small {
   display: block;
 }
 
-.developer-mode strong {
-  color: var(--color-brown-800);
-  font-size: 11px;
+.account-messenger-main strong {
+  color: #111827;
+  font-size: 15px;
 }
 
-.developer-mode small {
-  margin-top: 2px;
-  color: var(--color-muted);
-  font-size: 9px;
+.account-messenger-main small {
+  margin-top: 3px;
+  color: #9ca3af;
+  font-size: 12px;
 }
 
-.developer-mode button {
+.account-kakao-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: #191600;
+  background: #fee500;
+  border-radius: 12px;
+}
+
+.account-kakao-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.account-connected-badge {
   flex: 0 0 auto;
-  padding: 7px 9px;
-  color: var(--color-brand);
-  background: #fff;
-  border: 1px solid var(--color-brand);
+  padding: 7px 11px;
+  color: #fff;
+  background: #3b82f6;
   border-radius: 999px;
-  font-size: 10px;
-  font-weight: 900;
+  font-size: 12px;
+  font-weight: 700;
 }
 
-.developer-mode button.is-active {
+.account-info-card > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+}
+
+.account-info-card > div + div {
+  border-top: 1px solid #f3f4f6;
+}
+
+.account-info-card span {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.account-info-card strong {
+  color: #111827;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+  word-break: break-all;
+}
+
+.account-message {
+  margin: 10px 2px 0;
+  color: var(--color-brand);
+  font-size: 12px;
+}
+
+.account-danger-section .account-section-head h2,
+.account-danger-section .account-section-head p {
+  color: #ef4444;
+}
+
+.account-action-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px;
+}
+
+.account-action-card + .account-action-card {
+  margin-top: 10px;
+}
+
+.account-action-card strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #111827;
+  font-size: 15px;
+}
+
+.account-action-card p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.account-button {
+  flex: 0 0 auto;
+  min-width: 84px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.account-button--ghost {
+  color: #374151;
+  background: #fff;
+  border: 1px solid #d1d5db;
+}
+
+.account-button--danger {
   color: #fff;
-  background: var(--color-brand);
+  background: #ef4444;
+  border: 0;
 }
 
 .member-page {

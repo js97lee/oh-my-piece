@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import KakaoLoginButton from "../components/auth/KakaoLoginButton";
 import MobilePageShell from "../components/layout/MobilePageShell";
-import { setAuthPreview, useAuthPreview } from "../hooks/useAuthPreview";
+import { useAuthPreview } from "../hooks/useAuthPreview";
 import { completeKakaoLoginFromCallback, getKakaoSession } from "../services/kakaoAuth";
 
 export default function MyPage() {
@@ -49,16 +49,6 @@ export default function MyPage() {
       });
   }, [searchParams, setSearchParams, navigate]);
 
-  const togglePreview = () => {
-    const nextState = !isAuthenticated;
-    const returnTo = searchParams.get("returnTo");
-
-    setAuthPreview(nextState);
-    if (nextState && returnTo?.startsWith("/") && !returnTo.startsWith("//")) {
-      navigate(returnTo);
-    }
-  };
-
   return (
     <MobilePageShell mainClassName="mypage" showFooter={false}>
       <section className="mypage-content">
@@ -83,15 +73,6 @@ export default function MyPage() {
           <br />
           동의하게 됩니다.
         </small>
-        <div className="developer-mode">
-          <span>
-            <strong>개발자 모드</strong>
-            <small>카카오 로그인 연동 전 화면 미리보기</small>
-          </span>
-          <button className={isAuthenticated ? "is-active" : ""} type="button" onClick={togglePreview}>
-            {isAuthenticated ? "로그인됨" : "로그인 보기"}
-          </button>
-        </div>
       </section>
     </MobilePageShell>
   );

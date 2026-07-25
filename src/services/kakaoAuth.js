@@ -69,6 +69,7 @@ export function startKakaoLogin() {
     redirect_uri: redirectUri,
     response_type: "code",
     state,
+    scope: "profile_nickname,account_email,name,phone_number",
   });
 
   window.location.assign(`https://kauth.kakao.com/oauth/authorize?${params.toString()}`);
@@ -92,8 +93,26 @@ async function fetchKakaoProfile(accessToken) {
   return {
     id: profile.id,
     nickname: properties.nickname || account.profile?.nickname || "오마이피스 회원",
+    name: account.name || properties.nickname || account.profile?.nickname || "오마이피스 회원",
     email: account.email || null,
+    phoneNumber: account.phone_number || null,
   };
+}
+
+export async function syncKakaoProfile() {
+  const session = getKakaoSession();
+  if (!session?.accessToken) {
+    throw new Error("로그인이 필요합니다.");
+  }
+
+  const profile = await fetchKakaoProfile(session.accessToken);
+  setKakaoSession({
+    ...session,
+    profile,
+    connectedAt: session.connectedAt || Date.now(),
+    syncedAt: Date.now(),
+  });
+  return profile;
 }
 
 export async function completeKakaoLoginFromCallback(searchParams) {
@@ -140,6 +159,8 @@ export async function completeKakaoLoginFromCallback(searchParams) {
     accessToken: payload.access_token,
     refreshToken: payload.refresh_token || null,
     expiresAt: Date.now() + (payload.expires_in || 0) * 1000,
+    connectedAt: Date.now(),
+    syncedAt: Date.now(),
     profile,
   });
 
