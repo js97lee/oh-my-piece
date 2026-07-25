@@ -10,8 +10,15 @@ export default async function handler(req, res) {
   }
 
   const restApiKey = process.env.KAKAO_REST_API_KEY || process.env.VITE_KAKAO_REST_API_KEY;
+  const clientSecret = process.env.KAKAO_CLIENT_SECRET;
+
   if (!restApiKey) {
     res.status(500).json({ error: "missing_kakao_rest_api_key" });
+    return;
+  }
+
+  if (!clientSecret) {
+    res.status(500).json({ error: "missing_kakao_client_secret" });
     return;
   }
 
@@ -29,12 +36,8 @@ export default async function handler(req, res) {
       client_id: restApiKey,
       redirect_uri: redirectUri,
       code,
+      client_secret: clientSecret,
     });
-
-    const clientSecret = process.env.KAKAO_CLIENT_SECRET;
-    if (clientSecret) {
-      tokenBody.set("client_secret", clientSecret);
-    }
 
     const response = await fetch("https://kauth.kakao.com/oauth/token", {
       method: "POST",
