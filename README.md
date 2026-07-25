@@ -22,10 +22,16 @@ npm run dev
 - `src/styles`: 디자인 토큰과 전역 스타일
 - `vercel.json`: 클라이언트 라우트 리라이트 설정
 
-## 주요 화면
+## 카카오 로그인
 
-- 자동 전환 히어로 배너
-- 콘텐츠 카드와 콘텐츠별 상세 페이지
-- 이용방법 안내
-- 카카오 로그인 진입 UI
-- 분리 페이지 라우트: `/notices`, `/FAQ`, `/mypage`, `/contents/:slug`, `/policies/terms`, `/policies/privacy`
+1. `.env.local`에 REST API 키를 넣습니다. (`.env.example` 참고)
+2. [카카오 개발자 콘솔](https://developers.kakao.com/) → 내 애플리케이션 → **카카오 로그인** → **Redirect URI**에 아래를 모두 등록합니다.
+   - `http://localhost:5173/mypage`
+   - `http://localhost:5174/mypage` (포트가 다를 때)
+   - `https://oh-my-piece.vercel.app/mypage`
+   - `https://daily-piece.vercel.app/mypage` (사용하는 경우)
+3. 카카오 로그인 활성화, 필요 시 닉네임/이메일 동의 항목을 설정합니다.
+4. Vercel Production/Preview 환경변수:
+   - `VITE_KAKAO_REST_API_KEY`
+   - `KAKAO_REST_API_KEY` (토큰 교환 API용, 값은 REST API 키와 동일)
+5. Redirect URI는 기본으로 `${현재 origin}/mypage`를 사용하므로 로컬과 배포 도메인이 각각 자동 적용됩니다.

@@ -1,4 +1,9 @@
 import { useEffect, useState } from "react";
+import {
+  clearKakaoSession,
+  isKakaoAuthenticated,
+  subscribeAuthChange,
+} from "../services/kakaoAuth";
 
 const PREVIEW_KEY = "oh_my_piece_preview_member";
 const PREVIEW_EVENT = "oh-my-piece-auth-preview";
@@ -12,20 +17,31 @@ export function setAuthPreview(isAuthenticated) {
   window.dispatchEvent(new CustomEvent(PREVIEW_EVENT, { detail: isAuthenticated }));
 }
 
+export function logoutAuth() {
+  clearKakaoSession();
+  setAuthPreview(false);
+}
+
+function getAuthState() {
+  return isKakaoAuthenticated() || getPreviewState();
+}
+
 export function useAuthPreview() {
-  const [isAuthenticated, setIsAuthenticated] = useState(getPreviewState);
+  const [isAuthenticated, setIsAuthenticated] = useState(getAuthState);
 
   useEffect(() => {
-    const syncPreviewState = (event) => {
-      setIsAuthenticated(event.type === PREVIEW_EVENT ? event.detail : getPreviewState());
+    const syncAuthState = () => {
+      setIsAuthenticated(getAuthState());
     };
 
-    window.addEventListener(PREVIEW_EVENT, syncPreviewState);
-    window.addEventListener("storage", syncPreviewState);
+    const unsubscribe = subscribeAuthChange(syncAuthState);
+    window.addEventListener(PREVIEW_EVENT, syncAuthState);
+    window.addEventListener("storage", syncAuthState);
 
     return () => {
-      window.removeEventListener(PREVIEW_EVENT, syncPreviewState);
-      window.removeEventListener("storage", syncPreviewState);
+      unsubscribe();
+      window.removeEventListener(PREVIEW_EVENT, syncAuthState);
+      window.removeEventListener("storage", syncAuthState);
     };
   }, []);
 

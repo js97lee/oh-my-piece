@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { memberMenuGroups, policyLinks, serviceLinks } from "../../data/site";
-import { setAuthPreview } from "../../hooks/useAuthPreview";
+import { logoutAuth } from "../../hooks/useAuthPreview";
 import KakaoLoginButton from "../auth/KakaoLoginButton";
 import { BrandLink } from "../brand/Brand";
 
@@ -47,7 +47,7 @@ function MenuIcon({ name }) {
 
 function MemberDrawer({ onClose }) {
   const logout = () => {
-    setAuthPreview(false);
+    logoutAuth();
     onClose();
   };
 

@@ -5,9 +5,19 @@ import mathHighImage from "../../assets/card-math-high.jpg";
 import mathMidImage from "../../assets/card-math-mid.jpg";
 import mathBasicImage from "../../assets/card-math-basic.jpg";
 
-const annualSubscription = {
-  totalPrice: "39,000원",
-  monthlyPrice: "월 3,250원",
+const pricingByLevel = {
+  basic: {
+    totalPrice: "39,000원",
+    monthlyPrice: "월 3,250원",
+  },
+  middle: {
+    totalPrice: "59,000원",
+    monthlyPrice: "월 4,917원",
+  },
+  high: {
+    totalPrice: "79,000원",
+    monthlyPrice: "월 6,583원",
+  },
 };
 
 export const contentSections = [
@@ -38,7 +48,7 @@ export const contentSections = [
         ],
         weeklyPlan: ["월 · 고급 어휘와 문맥", "화 · 복합 구문 분석", "수 · 주제와 요지 찾기", "목 · 추론과 빈칸 문제", "금 · 주간 실전 복습"],
         recommendedFor: ["중급 영어를 넘어 심화 학습이 필요한 분", "고급 어휘와 독해력을 높이고 싶은 분", "짧게 실전 감각을 유지하고 싶은 분"],
-        ...annualSubscription,
+        ...pricingByLevel.high,
         level: "high",
         discount: "上 LEVEL",
       },
@@ -64,7 +74,7 @@ export const contentSections = [
         ],
         weeklyPlan: ["월 · 시제와 기본 문장", "화 · 조동사와 표현", "수 · 비교와 수식", "목 · 생활 영어 독해", "금 · 주간 문법 복습"],
         recommendedFor: ["기초 영어 다음 단계가 필요한 분", "문법과 회화를 함께 공부하고 싶은 분", "꾸준히 독해 습관을 만들고 싶은 분"],
-        ...annualSubscription,
+        ...pricingByLevel.middle,
         level: "middle",
         discount: "中 LEVEL",
       },
@@ -90,7 +100,7 @@ export const contentSections = [
         ],
         weeklyPlan: ["월 · 일상과 인사", "화 · 사람과 감정", "수 · 음식과 생활", "목 · 장소와 이동", "금 · 주간 단어 복습"],
         recommendedFor: ["영어를 처음부터 다시 시작하는 분", "단어 암기가 부담스러운 분", "매일 짧게 영어 습관을 만들고 싶은 분"],
-        ...annualSubscription,
+        ...pricingByLevel.basic,
         level: "basic",
         discount: "下 LEVEL",
       },
@@ -116,7 +126,7 @@ export const contentSections = [
         ],
         weeklyPlan: ["월 · 개념 확장", "화 · 조건 해석", "수 · 복합 유형", "목 · 사고력 도전", "금 · 주간 심화 테스트"],
         recommendedFor: ["기본 유형을 충분히 익힌 분", "고난도 문제 해결력을 높이고 싶은 분", "심화 수학을 매일 꾸준히 학습하고 싶은 분"],
-        ...annualSubscription,
+        ...pricingByLevel.high,
         level: "high",
         discount: "上 LEVEL",
       },
@@ -142,7 +152,7 @@ export const contentSections = [
         ],
         weeklyPlan: ["월 · 핵심 개념", "화 · 기본 유형", "수 · 응용 유형", "목 · 서술형 풀이", "금 · 주간 유형 복습"],
         recommendedFor: ["개념과 문제 풀이를 함께 익히고 싶은 분", "유형별 풀이가 아직 익숙하지 않은 분", "매일 수학 학습량을 유지하고 싶은 분"],
-        ...annualSubscription,
+        ...pricingByLevel.middle,
         level: "middle",
         discount: "中 LEVEL",
       },
@@ -168,7 +178,7 @@ export const contentSections = [
         ],
         weeklyPlan: ["월 · 수와 연산", "화 · 규칙과 관계", "수 · 도형 기초", "목 · 측정과 단위", "금 · 주간 기초 복습"],
         recommendedFor: ["수학의 기초부터 다시 시작하는 분", "연산 실수를 줄이고 싶은 분", "쉬운 문제로 자신감을 쌓고 싶은 분"],
-        ...annualSubscription,
+        ...pricingByLevel.basic,
         level: "basic",
         discount: "下 LEVEL",
       },
