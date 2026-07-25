@@ -14,7 +14,7 @@ export default function KakaoLoginButton({ variant = "page" }) {
   return (
     <button className={`kakao-login-button kakao-login-button--${variant}`} type="button" onClick={startKakaoLogin}>
       <KakaoIcon />
-      카카오로 시작하기
+      카카오로 로그인하기
     </button>
   );
 }
