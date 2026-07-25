@@ -29,7 +29,6 @@ npm run dev
    - `http://localhost:5173/mypage`
    - `http://localhost:5174/mypage` (포트가 다를 때)
    - `https://oh-my-piece.vercel.app/mypage`
-   - `https://daily-piece.vercel.app/mypage` (사용하는 경우)
 3. 카카오 로그인 활성화, 필요 시 닉네임/이메일 동의 항목을 설정합니다.
 4. Vercel Production/Preview 환경변수:
    - `VITE_KAKAO_REST_API_KEY`

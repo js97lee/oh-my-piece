@@ -3,9 +3,9 @@ import heroBannerThree from "../../assets/hero-banner-3.jpg";
 import heroBannerOne from "../../assets/hero-banner.jpg";
 
 export const heroBanners = [
-  { src: heroBannerOne, alt: "오마이피스 상단 배너 1" },
-  { src: heroBannerTwo, alt: "오마이피스 상단 배너 2" },
-  { src: heroBannerThree, alt: "오마이피스 상단 배너 3" },
+  { src: heroBannerOne, alt: "오마이피스 - 매일 카톡으로 받는 영어 수학 학습" },
+  { src: heroBannerTwo, alt: "오마이피스 영어 구독 콘텐츠 소개 배너" },
+  { src: heroBannerThree, alt: "오마이피스 수학 구독 콘텐츠 소개 배너" },
 ];
 
 export const flowSteps = [

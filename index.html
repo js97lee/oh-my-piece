@@ -3,12 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#8f3d16" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="googlebot" content="index,follow" />
+    <meta name="author" content="오마이피스 (리얼데이)" />
     <link rel="icon" type="image/png" href="/assets/favicon.png" />
-    <title>오마이피스 - 매일 카톡으로 지식 한 입</title>
-    <meta name="description" content="오마이피스는 영어, 경제, AI, 교양 콘텐츠를 카카오톡으로 매일 받아보는 모바일 구독 서비스입니다." />
+    <link rel="apple-touch-icon" href="/assets/app-icon-ohmypiece.png" />
+    <title>오마이피스 | 매일 카톡으로 받는 영어·수학 학습</title>
+    <meta
+      name="description"
+      content="오마이피스는 영어·수학 학습 콘텐츠를 카카오톡으로 매일 받아보는 구독 서비스입니다. 上·中·下 레벨에 맞춰 하루 한 조각씩 꾸준히 공부하세요."
+    />
+    <meta
+      name="keywords"
+      content="오마이피스,OH MY PIECE,카카오톡 학습,영어 구독,수학 구독,매일 영어,매일 수학,영어 단어,영어 독해,수학 문제,카톡 콘텐츠,모바일 학습,연간 구독,리얼데이"
+    />
     <link rel="canonical" href="https://oh-my-piece.vercel.app/" />
-    <meta property="og:title" content="오마이피스 - 매일 카톡으로 지식 한 조각" />
-    <meta property="og:description" content="하루 한 조각의 지식이 당신의 하루를 바꿉니다." />
+    <meta property="og:title" content="오마이피스 | 매일 카톡으로 받는 영어·수학 학습" />
+    <meta
+      property="og:description"
+      content="영어·수학을 내 수준에 맞게, 매일 카카오톡으로 한 조각씩. 오마이피스와 함께 하루 10분 학습 습관을 만드세요."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://oh-my-piece.vercel.app/" />
     <meta property="og:site_name" content="오마이피스" />
@@ -20,9 +35,83 @@
     <meta property="og:image:height" content="848" />
     <meta property="og:image:alt" content="매일 카톡으로 지식 한 조각을 전하는 오마이피스" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="오마이피스 - 매일 카톡으로 지식 한 조각" />
-    <meta name="twitter:description" content="하루 한 조각의 지식이 당신의 하루를 바꿉니다." />
+    <meta name="twitter:title" content="오마이피스 | 매일 카톡으로 받는 영어·수학 학습" />
+    <meta
+      name="twitter:description"
+      content="영어·수학을 내 수준에 맞게, 매일 카카오톡으로 한 조각씩. 오마이피스와 함께 하루 10분 학습 습관을 만드세요."
+    />
     <meta name="twitter:image" content="https://oh-my-piece.vercel.app/assets/og-ohmypiece.jpg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://oh-my-piece.vercel.app/#organization",
+            "name": "오마이피스",
+            "alternateName": ["OH MY PIECE", "Oh My Piece"],
+            "url": "https://oh-my-piece.vercel.app/",
+            "logo": "https://oh-my-piece.vercel.app/assets/app-icon-ohmypiece.png",
+            "email": "studio.realday@gmail.com",
+            "description": "영어·수학 학습 콘텐츠를 카카오톡으로 매일 받아보는 구독 서비스"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://oh-my-piece.vercel.app/#website",
+            "url": "https://oh-my-piece.vercel.app/",
+            "name": "오마이피스",
+            "alternateName": "OH MY PIECE",
+            "description": "매일 카톡으로 받는 영어·수학 학습 구독 서비스",
+            "inLanguage": "ko-KR",
+            "publisher": {
+              "@id": "https://oh-my-piece.vercel.app/#organization"
+            }
+          },
+          {
+            "@type": "ItemList",
+            "name": "오마이피스 학습 콘텐츠",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "영어 上",
+                "url": "https://oh-my-piece.vercel.app/contents/english-advanced"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "영어 中",
+                "url": "https://oh-my-piece.vercel.app/contents/english-intermediate"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "영어 下",
+                "url": "https://oh-my-piece.vercel.app/contents/daily-english-word"
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "수학 上",
+                "url": "https://oh-my-piece.vercel.app/contents/math-advanced"
+              },
+              {
+                "@type": "ListItem",
+                "position": 5,
+                "name": "수학 中",
+                "url": "https://oh-my-piece.vercel.app/contents/math-intermediate"
+              },
+              {
+                "@type": "ListItem",
+                "position": 6,
+                "name": "수학 下",
+                "url": "https://oh-my-piece.vercel.app/contents/math-basic"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
