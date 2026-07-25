@@ -1,5 +1,9 @@
-import aiNewsImage from "../../assets/card-ai-news.png";
-import englishWordImage from "../../assets/card-english-word.png";
+import englishHighImage from "../../assets/card-english-high.jpg";
+import englishMidImage from "../../assets/card-english-mid.jpg";
+import englishBasicImage from "../../assets/card-english-basic.jpg";
+import mathHighImage from "../../assets/card-math-high.jpg";
+import mathMidImage from "../../assets/card-math-mid.jpg";
+import mathBasicImage from "../../assets/card-math-basic.jpg";
 
 const annualSubscription = {
   totalPrice: "39,000원",
@@ -17,7 +21,7 @@ export const contentSections = [
         title: "영어 上",
         coverTitle: "고급 어휘와 독해\n영어 上",
         subtitle: "영어 上 · 심화 학습",
-        image: englishWordImage,
+        image: englishHighImage,
         description: "고급 어휘·긴 문장·심화 독해",
         detailDescription: "고급 어휘와 복합 문장, 심화 독해 문제를 매일 짧게 학습하며 한 단계 높은 영어 실력을 완성하는 콘텐츠입니다.",
         detailHeading: "영어 上은 이렇게 학습해요",
@@ -43,7 +47,7 @@ export const contentSections = [
         title: "영어 中",
         coverTitle: "문법과 독해를 탄탄하게\n영어 中",
         subtitle: "영어 中 · 핵심 학습",
-        image: englishWordImage,
+        image: englishMidImage,
         description: "핵심 문법·생활 표현·짧은 독해",
         detailDescription: "자주 쓰는 문법과 생활 표현, 짧은 독해를 균형 있게 학습하며 영어의 기본기를 탄탄하게 만드는 콘텐츠입니다.",
         detailHeading: "영어 中은 이렇게 학습해요",
@@ -69,7 +73,7 @@ export const contentSections = [
         title: "영어 下",
         coverTitle: "하루 3개부터 가볍게\n영어 下",
         subtitle: "영어 下 · 기초 학습",
-        image: englishWordImage,
+        image: englishBasicImage,
         description: "기초 단어·발음·짧은 예문",
         detailDescription: "꼭 필요한 기초 단어와 발음, 짧은 예문을 매일 3개씩 익히며 영어 학습의 첫 습관을 만드는 콘텐츠입니다.",
         detailHeading: "영어 下 단계는 이렇게 학습해요",
@@ -95,7 +99,7 @@ export const contentSections = [
         title: "수학 上",
         coverTitle: "사고력과 응용력을 높이는\n수학 上",
         subtitle: "수학 上 · 심화 학습",
-        image: aiNewsImage,
+        image: mathHighImage,
         description: "심화 개념·고난도 유형·사고력",
         detailDescription: "핵심 개념을 바탕으로 고난도 유형과 사고력 문제를 매일 해결하며 수학적 응용력을 높이는 콘텐츠입니다.",
         detailHeading: "수학 上은 이렇게 학습해요",
@@ -121,7 +125,7 @@ export const contentSections = [
         title: "수학 中",
         coverTitle: "핵심 개념과 유형을 탄탄하게\n수학 中",
         subtitle: "수학 中 · 핵심 학습",
-        image: aiNewsImage,
+        image: mathMidImage,
         description: "핵심 개념·대표 유형·풀이 과정",
         detailDescription: "꼭 알아야 할 핵심 개념과 대표 유형을 매일 반복하며 흔들리지 않는 수학 기본기를 만드는 콘텐츠입니다.",
         detailHeading: "수학 中은 이렇게 학습해요",
@@ -147,7 +151,7 @@ export const contentSections = [
         title: "수학 下",
         coverTitle: "기초부터 차근차근\n수학 下",
         subtitle: "수학 下 · 기초 학습",
-        image: aiNewsImage,
+        image: mathBasicImage,
         description: "기초 연산·쉬운 개념·반복 문제",
         detailDescription: "기초 연산과 쉬운 개념 설명, 반복 문제를 통해 수학에 대한 부담을 줄이고 매일의 학습 습관을 만드는 콘텐츠입니다.",
         detailHeading: "수학 下 단계는 이렇게 학습해요",
