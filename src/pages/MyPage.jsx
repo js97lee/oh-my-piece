@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import KakaoLoginButton from "../components/auth/KakaoLoginButton";
 import MobilePageShell from "../components/layout/MobilePageShell";
 import { useAuthPreview } from "../hooks/useAuthPreview";
-import { completeKakaoLoginFromCallback, getKakaoSession, startKakaoLogin } from "../services/kakaoAuth";
+import { completeKakaoLoginFromCallback, getKakaoSession } from "../services/kakaoAuth";
 
 export default function MyPage() {
   const isAuthenticated = useAuthPreview();
@@ -67,14 +67,7 @@ export default function MyPage() {
         {loginError ? <p className="mypage-description">{loginError}</p> : null}
       </section>
       <section className="mypage-actions">
-        {!isAuthenticated && !isCompletingLogin ? (
-          <div className="mypage-auth-buttons">
-            <button className="signup-button" type="button" onClick={startKakaoLogin}>
-              회원가입하기
-            </button>
-            <KakaoLoginButton />
-          </div>
-        ) : null}
+        {!isAuthenticated && !isCompletingLogin ? <KakaoLoginButton /> : null}
         <small>
           로그인 시 <Link to="/policies/terms">이용약관</Link> 및 <Link to="/policies/privacy">개인정보처리방침</Link>에
           <br />

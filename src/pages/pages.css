@@ -58,7 +58,7 @@
 
 .account-page {
   padding: 28px var(--page-padding-x) 48px;
-  background: #f3f4f6;
+  background: #fff;
 }
 
 .account-page-header {
@@ -204,6 +204,27 @@
   font-weight: 700;
   text-align: right;
   word-break: break-all;
+}
+
+.account-profile-photo-row {
+  align-items: center;
+}
+
+.account-profile-photo {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: #f3f4f6;
+}
+
+.account-profile-photo--fallback {
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--color-brand);
+  font-size: 20px;
+  font-weight: 800;
 }
 
 .account-message {

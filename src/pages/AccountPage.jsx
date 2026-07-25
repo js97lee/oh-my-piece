@@ -100,6 +100,21 @@ export default function AccountPage() {
           </div>
         </div>
         <article className="account-card account-info-card">
+          <div className="account-profile-photo-row">
+            <span>프로필</span>
+            {profile.profileImage ? (
+              <img
+                className="account-profile-photo"
+                src={profile.profileImage}
+                alt={`${profile.name || profile.nickname || "회원"} 프로필`}
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <span className="account-profile-photo account-profile-photo--fallback" aria-hidden="true">
+                {(profile.name || profile.nickname || "?").slice(0, 1)}
+              </span>
+            )}
+          </div>
           <div>
             <span>이름</span>
             <strong>{profile.name || profile.nickname || "—"}</strong>

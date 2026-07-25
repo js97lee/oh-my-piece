@@ -69,7 +69,7 @@ export function startKakaoLogin() {
     redirect_uri: redirectUri,
     response_type: "code",
     state,
-    scope: "profile_nickname,account_email,name,phone_number",
+    scope: "profile_nickname,profile_image,account_email,name,phone_number",
   });
 
   window.location.assign(`https://kauth.kakao.com/oauth/authorize?${params.toString()}`);
@@ -96,6 +96,12 @@ async function fetchKakaoProfile(accessToken) {
     name: account.name || properties.nickname || account.profile?.nickname || "오마이피스 회원",
     email: account.email || null,
     phoneNumber: account.phone_number || null,
+    profileImage:
+      account.profile?.profile_image_url ||
+      account.profile?.thumbnail_image_url ||
+      properties.profile_image ||
+      properties.thumbnail_image ||
+      null,
   };
 }
 
