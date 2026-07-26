@@ -3,7 +3,13 @@ import AccountPage from "./pages/AccountPage";
 import ContentDetailPage from "./pages/ContentDetailPage";
 import FaqPage from "./pages/FaqPage";
 import LandingPage from "./pages/LandingPage";
-import { GiftHistoryPage, GiftPage, MemberUtilityPage, SubscriptionPage } from "./pages/MemberPages";
+import {
+  GiftHistoryPage,
+  GiftPage,
+  MemberUtilityPage,
+  SubscriptionDetailPage,
+  SubscriptionPage,
+} from "./pages/MemberPages";
 import MyPage from "./pages/MyPage";
 import NoticesPage from "./pages/NoticesPage";
 import { PrivacyPage, TermsPage } from "./pages/PolicyPage";
@@ -19,6 +25,7 @@ export default function App() {
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/subscriptions" element={<SubscriptionPage />} />
+      <Route path="/subscriptions/:slug" element={<SubscriptionDetailPage />} />
       <Route path="/coupons" element={<MemberUtilityPage title="쿠폰함" description="보유 중인 쿠폰과 사용 기간을 확인해요." />} />
       <Route path="/payments" element={<MemberUtilityPage title="결제 내역" description="구독과 선물 결제 내역을 확인해요." />} />
       <Route path="/account" element={<AccountPage />} />

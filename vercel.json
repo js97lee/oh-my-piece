@@ -22,6 +22,10 @@
       "destination": "/"
     },
     {
+      "source": "/subscriptions/(.*)",
+      "destination": "/"
+    },
+    {
       "source": "/coupons",
       "destination": "/"
     },
