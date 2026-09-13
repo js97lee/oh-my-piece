@@ -18,6 +18,10 @@
       "destination": "/"
     },
     {
+      "source": "/login",
+      "destination": "/"
+    },
+    {
       "source": "/subscriptions",
       "destination": "/"
     },

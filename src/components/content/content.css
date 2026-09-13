@@ -408,12 +408,19 @@
   line-height: 1.55;
 }
 
+.detail-hero {
+  display: grid;
+}
+
 .subscribe-floating {
   position: fixed;
   bottom: 14px;
   left: 50%;
   z-index: 100;
-  width: min(calc(100% - (var(--page-padding-x) * 2)), calc(var(--page-width) - (var(--page-padding-x) * 2)));
+  width: min(
+    calc(100% - (var(--page-padding-x) * 2)),
+    calc(var(--content-max) - (var(--page-padding-x) * 2))
+  );
   transform: translateX(-50%);
   transition: opacity 180ms ease, transform 180ms ease;
 }
@@ -434,4 +441,144 @@ body.drawer-open .subscribe-floating {
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, 10px);
+}
+
+@media (min-width: 768px) {
+  .course-cover {
+    padding: 18px;
+  }
+
+  .course-cover strong {
+    font-size: 24px;
+  }
+
+  .course-body {
+    padding: 16px 16px 18px;
+  }
+
+  .course-description {
+    font-size: 13px;
+  }
+
+  .content-pricing--compact strong {
+    font-size: 20px;
+  }
+
+  .content-detail {
+    width: min(100%, var(--content-max));
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .detail-hero {
+    grid-template-columns: 1.08fr 0.92fr;
+    align-items: stretch;
+    margin: 0 var(--page-padding-x);
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 18px;
+  }
+
+  .detail-visual {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+
+  .detail-summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px 28px;
+    border-bottom: 0;
+  }
+
+  .detail-summary h1 {
+    font-size: 34px;
+  }
+
+  .detail-summary > p {
+    font-size: 15px;
+  }
+
+  .detail-benefits,
+  .detail-routine,
+  .detail-weekly-plan,
+  .detail-recommendations,
+  .detail-subscription-guide {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
+  .detail-benefits ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .detail-benefits li {
+    padding: 16px;
+    padding-left: 16px;
+    background: var(--color-surface-warm);
+    border-radius: var(--radius-sm);
+  }
+
+  .detail-benefits li::before {
+    display: none;
+  }
+
+  .detail-routine ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .detail-weekly-plan ul {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .detail-weekly-plan li:last-child {
+    grid-column: auto;
+  }
+
+  .detail-recommendations ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .detail-subscription-guide dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .subscribe-floating a {
+    min-height: 54px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .detail-hero {
+    margin-top: 28px;
+    min-height: 420px;
+  }
+
+  .detail-summary {
+    padding: 40px 44px;
+  }
+
+  .detail-summary h1 {
+    font-size: 40px;
+  }
+
+  .detail-benefits,
+  .detail-routine,
+  .detail-weekly-plan,
+  .detail-recommendations,
+  .detail-subscription-guide {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .detail-hero {
+    min-height: 460px;
+  }
 }

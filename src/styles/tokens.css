@@ -27,5 +27,28 @@
   --shadow-sm: 0 2px 8px rgba(84, 36, 15, 0.06);
   --shadow-md: 0 10px 26px rgba(84, 36, 15, 0.18);
   --page-width: 512px;
+  --content-max: 512px;
   --page-padding-x: 18px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-width: 100%;
+    --content-max: 920px;
+    --page-padding-x: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --page-width: 100%;
+    --content-max: 1440px;
+    --page-padding-x: 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --page-padding-x: 48px;
+  }
 }

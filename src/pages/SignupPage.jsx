@@ -29,6 +29,8 @@ export default function SignupPage() {
     name: "",
     phone: "",
     email: "",
+    password: "",
+    passwordConfirm: "",
     code: "",
     gender: "",
     ageGroup: "",
@@ -45,7 +47,14 @@ export default function SignupPage() {
 
   const returnTo = searchParams.get("returnTo");
   const canSubmit = useMemo(() => {
-    return Boolean(form.name.trim() && form.email.trim() && form.phone.trim() && phoneVerified);
+    return Boolean(
+      form.name.trim() &&
+        form.email.trim() &&
+        form.phone.trim() &&
+        form.password &&
+        form.passwordConfirm &&
+        phoneVerified,
+    );
   }, [form, phoneVerified]);
 
   if (isAuthenticated) {
@@ -108,6 +117,8 @@ export default function SignupPage() {
         name: form.name,
         phone: form.phone,
         email: form.email,
+        password: form.password,
+        passwordConfirm: form.passwordConfirm,
         gender: form.gender || null,
         ageGroup: form.ageGroup || null,
         academicLevel: form.academicLevel || null,
@@ -206,6 +217,34 @@ export default function SignupPage() {
               onChange={(event) => updateField("email", event.target.value)}
               placeholder="email@example.com"
               autoComplete="email"
+              required
+            />
+          </label>
+
+          <label className="signup-field">
+            <span>비밀번호</span>
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={(event) => updateField("password", event.target.value)}
+              placeholder="6자 이상 입력해 주세요"
+              autoComplete="new-password"
+              minLength={6}
+              required
+            />
+          </label>
+
+          <label className="signup-field">
+            <span>비밀번호 확인</span>
+            <input
+              type="password"
+              name="passwordConfirm"
+              value={form.passwordConfirm}
+              onChange={(event) => updateField("passwordConfirm", event.target.value)}
+              placeholder="비밀번호를 한 번 더 입력해 주세요"
+              autoComplete="new-password"
+              minLength={6}
               required
             />
           </label>

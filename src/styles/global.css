@@ -37,6 +37,14 @@ button {
   padding-left: var(--page-padding-x);
 }
 
+.page-rail {
+  width: min(100%, var(--content-max));
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--page-padding-x);
+  padding-left: var(--page-padding-x);
+}
+
 .section-head {
   margin-bottom: 12px;
 }

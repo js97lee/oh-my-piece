@@ -1563,6 +1563,124 @@
   text-decoration: underline;
 }
 
+.login-page {
+  padding: 28px var(--page-padding-x) 48px;
+  background: #fff;
+}
+
+.login-header {
+  margin-bottom: 24px;
+}
+
+.login-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.login-header p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.login-form {
+  display: grid;
+  gap: 14px;
+  max-width: 420px;
+}
+
+.login-field {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.login-field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  color: var(--color-ink);
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.login-field input:focus {
+  outline: 2px solid rgba(143, 61, 22, 0.25);
+  border-color: var(--color-brand);
+}
+
+.login-error {
+  margin: 0;
+  color: #d44747;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.login-submit {
+  min-height: 50px;
+  color: #fff;
+  background: var(--color-brand);
+  border: 0;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.login-submit:disabled {
+  opacity: 0.45;
+}
+
+.login-divider {
+  display: grid;
+  max-width: 420px;
+  margin: 22px 0;
+  place-items: center;
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.login-divider::before {
+  width: 100%;
+  height: 1px;
+  margin-bottom: -10px;
+  background: var(--color-line);
+  content: "";
+}
+
+.login-divider span {
+  position: relative;
+  z-index: 1;
+  padding: 0 10px;
+  background: #fff;
+}
+
+.login-extra {
+  display: grid;
+  gap: 14px;
+  max-width: 420px;
+}
+
+.login-footnote {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.login-footnote a {
+  color: var(--color-brand);
+  font-weight: 800;
+  text-decoration: underline;
+}
+
 .purchase-complete {
   padding: 38px 20px;
   background: var(--color-surface-warm);
@@ -1593,4 +1711,123 @@
   color: var(--color-muted);
   font-size: 12px;
   line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .mypage-content {
+    max-width: 640px;
+    margin: 0 auto;
+    padding-top: 72px;
+  }
+
+  .mypage-actions {
+    max-width: 440px;
+    margin: 0 auto;
+    padding-bottom: 56px;
+  }
+
+  .member-page,
+  .account-page,
+  .purchase-page,
+  .signup-page,
+  .login-page,
+  .info-page {
+    width: min(100%, var(--content-max));
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .member-page {
+    padding: 48px var(--page-padding-x) 64px;
+  }
+
+  .member-page-header h1 {
+    font-size: 34px;
+  }
+
+  .member-page-header p {
+    font-size: 15px;
+  }
+
+  .subscription-list ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .subscription-learn-page {
+    grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+    gap: 20px 24px;
+    align-items: start;
+  }
+
+  .subscription-learn-page .member-page-header,
+  .subscription-learn-page .subscription-card,
+  .subscription-learn-page .learn-progress {
+    grid-column: 1 / -1;
+  }
+
+  .subscription-learn-page .learn-day-panel {
+    grid-column: 1;
+    position: sticky;
+    top: 84px;
+  }
+
+  .subscription-learn-page .learn-message {
+    grid-column: 2;
+  }
+
+  .account-page {
+    padding-top: 48px;
+  }
+
+  .purchase-form {
+    grid-template-columns: 1.25fr 0.75fr;
+    align-items: start;
+  }
+
+  .purchase-form > .purchase-section {
+    grid-column: 1;
+  }
+
+  .purchase-form > .purchase-summary {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    position: sticky;
+    top: 88px;
+  }
+
+  .purchase-form > .payment-error,
+  .purchase-form > .purchase-submit {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mypage-content {
+    max-width: 720px;
+    padding-top: 96px;
+  }
+
+  .mypage-content h1 {
+    font-size: 44px;
+  }
+
+  .subscription-list ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+
+  .subscription-learn-page {
+    gap: 24px 32px;
+  }
+
+  .member-page-header h1 {
+    font-size: 38px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .subscription-list ul {
+    gap: 24px;
+  }
 }

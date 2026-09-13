@@ -73,6 +73,16 @@ export default function MyPage() {
               className="signup-button"
               to={
                 searchParams.get("returnTo")
+                  ? `/login?returnTo=${encodeURIComponent(searchParams.get("returnTo"))}`
+                  : "/login"
+              }
+            >
+              로그인하기
+            </Link>
+            <Link
+              className="signup-button signup-button--outline"
+              to={
+                searchParams.get("returnTo")
                   ? `/signup?returnTo=${encodeURIComponent(searchParams.get("returnTo"))}`
                   : "/signup"
               }

@@ -4,16 +4,18 @@ import DiscountBadge from "./DiscountBadge";
 export default function ContentDetailView({ content }) {
   return (
     <>
-      <figure className="detail-visual">
-        <img src={content.image} alt={`${content.title} 대표 이미지`} />
-        <DiscountBadge value={content.discount} tone={content.level} />
-      </figure>
-      <section className="detail-summary">
-        <span className="detail-eyebrow">OH MY PIECE CONTENT</span>
-        <h1>{content.title}</h1>
-        <p>{content.detailDescription}</p>
-        <ContentPricing content={content} variant="detail" />
-      </section>
+      <div className="detail-hero">
+        <figure className="detail-visual">
+          <img src={content.image} alt={`${content.title} 대표 이미지`} />
+          <DiscountBadge value={content.discount} tone={content.level} />
+        </figure>
+        <section className="detail-summary">
+          <span className="detail-eyebrow">OH MY PIECE CONTENT</span>
+          <h1>{content.title}</h1>
+          <p>{content.detailDescription}</p>
+          <ContentPricing content={content} variant="detail" />
+        </section>
+      </div>
       <section className="detail-benefits">
         <h2>{content.detailHeading}</h2>
         <ul>

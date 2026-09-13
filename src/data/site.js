@@ -3,9 +3,9 @@ import heroBannerThree from "../../assets/hero-banner-3.jpg";
 import heroBannerOne from "../../assets/hero-banner.jpg";
 
 export const heroBanners = [
-  { src: heroBannerOne, alt: "오마이피스 - 매일 카톡으로 받는 영어 수학 학습" },
-  { src: heroBannerTwo, alt: "오마이피스 영어 구독 콘텐츠 소개 배너" },
-  { src: heroBannerThree, alt: "오마이피스 수학 구독 콘텐츠 소개 배너" },
+  { src: heroBannerOne, alt: "오마이피스 - 매일 카톡으로 쌓이는 학습 습관" },
+  { src: heroBannerTwo, alt: "오마이피스 영어 - 하루 단어 세 개로 시작하는 영어 루틴" },
+  { src: heroBannerThree, alt: "오마이피스 수학 - 매일 한 문제씩 키우는 수학 자신감" },
 ];
 
 export const flowSteps = [

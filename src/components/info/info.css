@@ -76,6 +76,37 @@
   line-height: 1.55;
 }
 
+@media (min-width: 768px) {
+  .info-page {
+    width: min(100%, var(--content-max));
+    margin: 0 auto;
+    padding: 48px var(--page-padding-x) 64px;
+  }
+
+  .info-header h1 {
+    font-size: 34px;
+  }
+
+  .info-header p {
+    font-size: 15px;
+  }
+
+  .info-content {
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .notice-card {
+    padding: 20px;
+  }
+
+  .notice-card h2,
+  .faq-row h2,
+  .policy-row h2 {
+    font-size: 18px;
+  }
+}
+
 .policy-list {
   display: grid;
 }

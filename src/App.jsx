@@ -10,6 +10,7 @@ import {
   SubscriptionDetailPage,
   SubscriptionPage,
 } from "./pages/MemberPages";
+import LoginPage from "./pages/LoginPage";
 import MyPage from "./pages/MyPage";
 import NoticesPage from "./pages/NoticesPage";
 import { PrivacyPage, TermsPage } from "./pages/PolicyPage";
@@ -23,6 +24,7 @@ export default function App() {
       <Route path="/notices" element={<NoticesPage />} />
       <Route path="/FAQ" element={<FaqPage />} />
       <Route path="/mypage" element={<MyPage />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/subscriptions" element={<SubscriptionPage />} />
       <Route path="/subscriptions/:slug" element={<SubscriptionDetailPage />} />
