@@ -425,16 +425,44 @@
   transition: opacity 180ms ease, transform 180ms ease;
 }
 
+.subscribe-floating-toast {
+  width: fit-content;
+  margin: 0 auto 8px;
+  padding: 8px 12px;
+  color: #fff;
+  background: rgba(36, 22, 17, 0.88);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.subscribe-floating-actions {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 8px;
+}
+
+.subscribe-floating-cart,
 .subscribe-floating a {
   display: grid;
   min-height: 48px;
   place-items: center;
-  color: #fff;
-  background: var(--color-brand);
   border-radius: 9px;
-  box-shadow: 0 10px 28px rgba(63, 36, 23, 0.3);
   font-size: 15px;
   font-weight: 900;
+}
+
+.subscribe-floating-cart {
+  color: var(--color-brand);
+  background: #fff;
+  border: 1px solid var(--color-brand);
+  cursor: pointer;
+}
+
+.subscribe-floating a {
+  color: #fff;
+  background: var(--color-brand);
+  box-shadow: 0 10px 28px rgba(63, 36, 23, 0.3);
 }
 
 body.drawer-open .subscribe-floating {
@@ -547,7 +575,8 @@ body.drawer-open .subscribe-floating {
     gap: 12px;
   }
 
-  .subscribe-floating a {
+  .subscribe-floating a,
+  .subscribe-floating-cart {
     min-height: 54px;
     font-size: 16px;
   }

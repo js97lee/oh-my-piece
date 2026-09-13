@@ -10,6 +10,10 @@
       "destination": "/"
     },
     {
+      "source": "/events",
+      "destination": "/"
+    },
+    {
       "source": "/mypage",
       "destination": "/"
     },
@@ -19,6 +23,14 @@
     },
     {
       "source": "/login",
+      "destination": "/"
+    },
+    {
+      "source": "/search",
+      "destination": "/"
+    },
+    {
+      "source": "/cart",
       "destination": "/"
     },
     {

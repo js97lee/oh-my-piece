@@ -1,24 +1,32 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { memberMenuGroups } from "../../data/site";
+import { useCartCount } from "../../hooks/useCartCount";
 import { logoutAuth, useAuthPreview } from "../../hooks/useAuthPreview";
 import { useDrawer } from "../../hooks/useDrawer";
 import { BrandLink } from "../brand/Brand";
 import SiteDrawer from "./SiteDrawer";
 
-function MyPageIcon() {
+function CartIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 9h11v4.5a3.5 3.5 0 0 1-3.5 3.5h-4A3.5 3.5 0 0 1 4 13.5V9Z" />
-      <path d="M15 10h2.3a2.2 2.2 0 0 1 0 4.4H15" />
-      <path d="M6 20h10" />
-      <path d="M9 7.2c0-1 .7-1.4.7-2.3" />
-      <path d="M12 7.2c0-1 .7-1.4.7-2.3" />
+      <path d="M6 7h14l-1.4 8.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.7L5.2 4H3" />
+      <circle cx="10" cy="20" r="1.2" />
+      <circle cx="17" cy="20" r="1.2" />
     </svg>
   );
 }
 
-function DesktopMemberMenu() {
+function SearchIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="M16.5 16.5 21 21" />
+    </svg>
+  );
+}
+
+function MemberMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -81,45 +89,79 @@ function DesktopMemberMenu() {
   );
 }
 
+function HeaderSearch() {
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const next = query.trim();
+    if (!next) {
+      navigate("/search");
+      return;
+    }
+    navigate(`/search?q=${encodeURIComponent(next)}`);
+  };
+
+  return (
+    <form className="header-search" role="search" onSubmit={onSubmit}>
+      <SearchIcon />
+      <input
+        type="search"
+        name="q"
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+        placeholder="콘텐츠 검색"
+        aria-label="콘텐츠 검색"
+      />
+    </form>
+  );
+}
+
 export default function SiteHeader() {
   const drawer = useDrawer();
   const isAuthenticated = useAuthPreview();
+  const cartCount = useCartCount();
 
   return (
     <>
       <header className="app-header">
         <BrandLink />
         <nav className="header-desktop-nav" aria-label="주요 메뉴">
-          <Link to="/">홈</Link>
           <a href="/#content-catalog">콘텐츠</a>
           <Link to="/subscriptions">내 구독</Link>
+          <Link to="/events">이벤트</Link>
           <Link to="/FAQ">FAQ</Link>
         </nav>
 
-        <div className="header-desktop-actions">
-          {isAuthenticated ? (
-            <DesktopMemberMenu />
-          ) : (
-            <>
-              <Link className="header-login-link" to="/login">
-                로그인
-              </Link>
-              <Link className="header-signup-link" to="/signup">
-                회원가입
-              </Link>
-            </>
-          )}
-        </div>
+        <HeaderSearch />
 
-        <nav className="header-actions" aria-label="상단 메뉴">
-          <Link className="mypage-icon" to="/mypage" aria-label="마이페이지">
-            <MyPageIcon />
+        <div className="header-tools">
+          <Link className="header-cart" to="/cart" aria-label={`장바구니${cartCount > 0 ? `, ${cartCount}개` : ""}`}>
+            <CartIcon />
+            {cartCount > 0 ? <span className="header-cart-badge">{cartCount > 9 ? "9+" : cartCount}</span> : null}
           </Link>
+
+          <div className="header-auth-actions">
+            {isAuthenticated ? (
+              <MemberMenu />
+            ) : (
+              <>
+                <Link className="header-login-link" to="/login">
+                  로그인
+                </Link>
+                <Link className="header-signup-link" to="/signup">
+                  회원가입
+                </Link>
+              </>
+            )}
+          </div>
+
           <button className="menu" type="button" aria-label="메뉴 열기" aria-controls="site-menu" aria-expanded={drawer.isOpen} onClick={drawer.open}>
             <span />
             <span />
           </button>
-        </nav>
+        </div>
       </header>
       <SiteDrawer isOpen={drawer.isOpen} isAuthenticated={isAuthenticated} onClose={drawer.close} />
     </>

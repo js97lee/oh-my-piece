@@ -97,6 +97,90 @@
   background: var(--color-brand);
 }
 
+.landing-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.landing-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(36, 22, 17, 0.48);
+  border: 0;
+  cursor: pointer;
+}
+
+.landing-popup-panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 380px);
+  overflow: hidden;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 24px 60px rgba(84, 36, 15, 0.28);
+}
+
+.landing-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: #fff;
+  background: rgba(36, 22, 17, 0.42);
+  border: 0;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.landing-popup-media {
+  display: block;
+}
+
+.landing-popup-media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.landing-popup-actions {
+  display: grid;
+  gap: 8px;
+  padding: 14px 14px 16px;
+}
+
+.landing-popup-cta {
+  display: grid;
+  min-height: 46px;
+  place-items: center;
+  color: #fff;
+  background: var(--color-brand);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.landing-popup-dismiss {
+  min-height: 38px;
+  color: var(--color-muted);
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
 .content-section {
   padding: 16px var(--page-padding-x) 12px;
   background: #fff;
@@ -227,6 +311,15 @@
 
   .hero-dot.is-active {
     width: 22px;
+  }
+
+  .landing-popup-panel {
+    width: min(100%, 420px);
+    border-radius: 12px;
+  }
+
+  .landing-popup-actions {
+    padding: 16px 16px 18px;
   }
 
   .content-section,
