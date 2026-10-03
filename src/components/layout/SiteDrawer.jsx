@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { memberMenuGroups, policyLinks, serviceLinks } from "../../data/site";
-import { logoutAuth } from "../../hooks/useAuthPreview";
+import { useAuth } from "../../context/AuthContext";
 import KakaoLoginButton from "../auth/KakaoLoginButton";
 import { BrandLink } from "../brand/Brand";
 
@@ -46,9 +47,15 @@ function MenuIcon({ name }) {
 }
 
 function MemberDrawer({ onClose }) {
-  const logout = () => {
-    logoutAuth();
-    onClose();
+  const { logout: signOut } = useAuth();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const logout = async () => {
+    setBusy(true);
+    setError("");
+    try { await signOut(); onClose(); }
+    catch (failure) { setError(failure.message); }
+    finally { setBusy(false); }
   };
 
   return (
@@ -71,10 +78,11 @@ function MemberDrawer({ onClose }) {
           ))}
         </section>
       ))}
-      <button className="drawer-menu-item drawer-logout" type="button" onClick={logout}>
+      <button className="drawer-menu-item drawer-logout" type="button" onClick={logout} disabled={busy}>
         <MenuIcon name="logout" />
         <span>로그아웃</span>
       </button>
+      {error && <p role="alert">{error}</p>}
     </div>
   );
 }

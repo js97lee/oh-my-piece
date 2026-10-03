@@ -1,4 +1,7 @@
-import { startKakaoLogin } from "../../services/kakaoAuth";
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { sessionRequest } from "../../services/auth";
+import { safeReturnTo } from "../../../shared/auth";
 
 function KakaoIcon() {
   return (
@@ -10,11 +13,26 @@ function KakaoIcon() {
   );
 }
 
-export default function KakaoLoginButton({ variant = "page" }) {
+export default function KakaoLoginButton({ variant = "page", returnTo = "/account" }) {
+  const { providers } = useAuth();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  if (!providers.kakao) return null;
+  const startKakaoLogin = async () => {
+    setBusy(true);
+    setError("");
+    try {
+      const data = await sessionRequest("kakao", { returnTo: safeReturnTo(returnTo, "/account") });
+      window.location.assign(data.url);
+    } catch (failure) { setError(failure.message); setBusy(false); }
+  };
   return (
-    <button className={`kakao-login-button kakao-login-button--${variant}`} type="button" onClick={startKakaoLogin}>
+    <>
+    <button disabled={busy} className={`kakao-login-button kakao-login-button--${variant}`} type="button" onClick={startKakaoLogin}>
       <KakaoIcon />
-      카카오로 로그인하기
+      {busy ? "카카오로 이동 중..." : "카카오로 로그인하기"}
     </button>
+    {error && <p className="login-error" role="alert">{error}</p>}
+    </>
   );
 }

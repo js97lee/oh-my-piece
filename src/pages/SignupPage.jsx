@@ -1,13 +1,10 @@
 import { useMemo, useState } from "react";
 import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import MobilePageShell from "../components/layout/MobilePageShell";
-import { useAuthPreview } from "../hooks/useAuthPreview";
-import {
-  isPhoneVerified,
-  registerLocalMember,
-  requestPhoneCode,
-  verifyPhoneCode,
-} from "../services/localAuth";
+import { useAuth } from "../context/AuthContext";
+import { safeReturnTo, validateCredentials, signupProfile } from "../../shared/auth";
+import { AuthLoading } from "../components/auth/RequireAuth";
+import EmailConfirmation from "../components/auth/EmailConfirmation";
 
 const SUBJECT_OPTIONS = [
   { value: "english", label: "영어" },
@@ -22,7 +19,7 @@ const GOAL_OPTIONS = [
 ];
 
 export default function SignupPage() {
-  const isAuthenticated = useAuthPreview();
+  const { isAuthenticated, loading, signup } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [form, setForm] = useState({
@@ -31,7 +28,6 @@ export default function SignupPage() {
     email: "",
     password: "",
     passwordConfirm: "",
-    code: "",
     gender: "",
     ageGroup: "",
     academicLevel: "",
@@ -39,24 +35,22 @@ export default function SignupPage() {
     level: "",
     learningGoal: "",
   });
-  const [phoneVerified, setPhoneVerified] = useState(false);
-  const [codeSent, setCodeSent] = useState(false);
-  const [phoneMessage, setPhoneMessage] = useState("");
+  const [confirmationEmail, setConfirmationEmail] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const returnTo = searchParams.get("returnTo");
+  const returnTo = safeReturnTo(searchParams.get("returnTo"), "/account");
   const canSubmit = useMemo(() => {
     return Boolean(
       form.name.trim() &&
         form.email.trim() &&
         form.phone.trim() &&
         form.password &&
-        form.passwordConfirm &&
-        phoneVerified,
+        form.passwordConfirm,
     );
-  }, [form, phoneVerified]);
+  }, [form]);
 
+  if (loading) return <AuthLoading />;
   if (isAuthenticated) {
     return <Navigate to={returnTo?.startsWith("/") ? returnTo : "/"} replace />;
   }
@@ -78,66 +72,23 @@ export default function SignupPage() {
     });
   };
 
-  const handleRequestCode = () => {
-    try {
-      const result = requestPhoneCode(form.phone);
-      setCodeSent(true);
-      setPhoneVerified(false);
-      setPhoneMessage(result.message);
-      setError("");
-    } catch (requestError) {
-      setError(requestError.message);
-      setPhoneMessage("");
-    }
-  };
-
-  const handleVerifyCode = () => {
-    try {
-      verifyPhoneCode(form.phone, form.code);
-      setPhoneVerified(true);
-      setPhoneMessage("전화번호 인증이 완료됐어요.");
-      setError("");
-    } catch (verifyError) {
-      setPhoneVerified(false);
-      setError(verifyError.message);
-    }
-  };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
     setError("");
-
     try {
-      if (!isPhoneVerified(form.phone) && !phoneVerified) {
-        throw new Error("전화번호 인증을 완료해 주세요.");
-      }
-
-      registerLocalMember({
-        name: form.name,
-        phone: form.phone,
-        email: form.email,
-        password: form.password,
-        passwordConfirm: form.passwordConfirm,
-        gender: form.gender || null,
-        ageGroup: form.ageGroup || null,
-        academicLevel: form.academicLevel || null,
-        preferredSubjects: form.preferredSubjects,
-        level: form.level || null,
-        learningGoal: form.learningGoal || null,
-      });
-
-      if (returnTo?.startsWith("/") && !returnTo.startsWith("//")) {
-        navigate(returnTo, { replace: true });
-        return;
-      }
-      navigate("/", { replace: true });
-    } catch (submitError) {
-      setError(submitError.message);
-    } finally {
-      setIsSubmitting(false);
-    }
+      validateCredentials(form, true);
+      signupProfile(form);
+      const result = await signup({ ...form, returnTo });
+      if (result.needsEmailConfirmation) {
+        setConfirmationEmail(form.email.trim());
+        setForm((previous) => ({ ...previous, password: "", passwordConfirm: "" }));
+      } else navigate(returnTo, { replace: true });
+    } catch (submitError) { setError(submitError.message); }
+    finally { setIsSubmitting(false); }
   };
+
+  if (confirmationEmail) return <MobilePageShell mainClassName="signup-page"><EmailConfirmation email={confirmationEmail} returnTo={returnTo} /></MobilePageShell>;
 
   return (
     <MobilePageShell mainClassName="signup-page">
@@ -165,48 +116,11 @@ export default function SignupPage() {
             />
           </label>
 
-          <div className="signup-field">
+          <label className="signup-field">
             <span>전화번호</span>
-            <div className="signup-phone-row">
-              <input
-                type="tel"
-                name="phone"
-                value={form.phone}
-                onChange={(event) => {
-                  updateField("phone", event.target.value);
-                  setPhoneVerified(false);
-                  setCodeSent(false);
-                }}
-                placeholder="010-0000-0000"
-                autoComplete="tel"
-                required
-              />
-              <button className="signup-secondary-button" type="button" onClick={handleRequestCode}>
-                인증번호 받기
-              </button>
-            </div>
-          </div>
-
-          {codeSent ? (
-            <div className="signup-field">
-              <span>인증번호</span>
-              <div className="signup-phone-row">
-                <input
-                  type="text"
-                  name="code"
-                  value={form.code}
-                  onChange={(event) => updateField("code", event.target.value)}
-                  placeholder="6자리 인증번호"
-                  inputMode="numeric"
-                  maxLength={6}
-                />
-                <button className="signup-secondary-button" type="button" onClick={handleVerifyCode}>
-                  확인
-                </button>
-              </div>
-              {phoneMessage ? <small className={phoneVerified ? "is-success" : ""}>{phoneMessage}</small> : null}
-            </div>
-          ) : null}
+            <input type="tel" name="phone" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} placeholder="010-0000-0000" autoComplete="tel" maxLength={20} required />
+            <small>연락처로 저장되며, 전화번호 인증은 진행하지 않습니다.</small>
+          </label>
 
           <label className="signup-field">
             <span>이메일</span>
@@ -228,9 +142,9 @@ export default function SignupPage() {
               name="password"
               value={form.password}
               onChange={(event) => updateField("password", event.target.value)}
-              placeholder="6자 이상 입력해 주세요"
+              placeholder="8자 이상 입력해 주세요"
               autoComplete="new-password"
-              minLength={6}
+              minLength={8}
               required
             />
           </label>
@@ -244,7 +158,7 @@ export default function SignupPage() {
               onChange={(event) => updateField("passwordConfirm", event.target.value)}
               placeholder="비밀번호를 한 번 더 입력해 주세요"
               autoComplete="new-password"
-              minLength={6}
+              minLength={8}
               required
             />
           </label>
@@ -329,10 +243,10 @@ export default function SignupPage() {
           </label>
         </section>
 
-        {error ? <p className="signup-error">{error}</p> : null}
+        {error ? <p className="signup-error" role="alert">{error}</p> : null}
 
         <button className="signup-submit" type="submit" disabled={!canSubmit || isSubmitting}>
-          {isSubmitting ? "가입 중..." : "가입 완료"}
+          {isSubmitting ? "가입 중..." : "가입하고 이메일 인증하기"}
         </button>
 
         <p className="signup-footnote">

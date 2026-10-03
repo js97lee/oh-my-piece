@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/alimtalk-test",
+      "destination": "/"
+    },
+    {
       "source": "/notices",
       "destination": "/"
     },
@@ -71,6 +75,10 @@
     },
     {
       "source": "/policies/privacy",
+      "destination": "/"
+    },
+    {
+      "source": "/payment/result",
       "destination": "/"
     }
   ],

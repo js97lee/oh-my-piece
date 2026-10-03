@@ -1,0 +1,95 @@
+.alim-page { min-height: 100vh; background: #f7f6f2; color: #2d2925; }
+.alim-topbar { display: flex; align-items: center; justify-content: space-between; padding: 22px max(24px, calc((100vw - 1080px) / 2)); border-bottom: 1px solid #e8e5de; background: #fff; }
+.alim-brand { font-size: 22px; font-weight: 900; letter-spacing: -1px; color: var(--color-brand-strong); }
+.alim-brand span { display: inline-block; margin-left: 12px; font-size: 11px; font-weight: 500; letter-spacing: 0; color: #7d776f; }
+.alim-badge { background: #faf2d0; border: 1px solid #ede0a8; border-radius: 24px; padding: 6px 12px; font-size: 12px; font-weight: 700; }
+.alim-main { max-width: 1128px; margin: auto; padding: 42px 24px 24px; }
+.alim-intro { margin-bottom: 28px; }
+.alim-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 2px; color: #997128; }
+.alim-intro h1 { margin: 10px 0 8px; font-size: clamp(24px, 4vw, 32px); letter-spacing: -1.4px; }
+.alim-intro p { margin: 0; font-size: 14px; color: #77716a; line-height: 1.7; }
+.alim-card { padding: 26px; border: 1px solid #e6e2d9; border-radius: 16px; background: #fff; box-shadow: 0 3px 8px #392a1603; }
+.alim-page h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; font-size: 17px; letter-spacing: -.4px; }
+.alim-page h3 { margin: 0 0 12px; font-size: 14px; }
+.alim-step { display: inline-grid; place-items: center; width: 25px; height: 25px; flex-shrink: 0; background: #f3eee4; border-radius: 50%; color: #826038; font-size: 12px; }
+.alim-connect { margin-bottom: 24px; }
+.alim-connect > div > p { margin: -5px 0 20px; color: #77716a; font-size: 13px; }
+.alim-connect-form, .alim-history-form { display: flex; align-items: end; gap: 12px; }
+.alim-connect-form .alim-field, .alim-history-form .alim-field { flex: 1; }
+.alim-field { display: flex; flex-direction: column; gap: 8px; font-size: 12px; font-weight: 700; min-width: 0; }
+.alim-field input, .alim-field select { width: 100%; min-width: 0; height: 45px; padding: 10px 12px; border: 1px solid #dedad2; border-radius: 8px; background: #fff; color: #302b25; font: inherit; font-size: 13px; font-weight: 500; }
+.alim-field input::placeholder { color: #aaa39a; }
+.alim-field input:focus, .alim-field select:focus { outline: 2px solid #d9b85f; outline-offset: 2px; }
+.alim-page input:disabled, .alim-page select:disabled { background: #f8f7f4; color: #9e988e; }
+.alim-button { min-height: 45px; border: 1px solid #dedad2; border-radius: 8px; background: #fff; color: #4d443a; padding: 12px 18px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+.alim-button:hover:not(:disabled) { filter: brightness(.96); }
+.alim-button:focus-visible, .alim-page summary:focus-visible { outline: 2px solid #9a731e; outline-offset: 3px; }
+.alim-button:disabled { opacity: .45; cursor: not-allowed; }
+.alim-button--dark { color: #fff; border-color: #3d342b; background: #3d342b; }
+.alim-button--send { width: 100%; margin-top: 24px; min-height: 50px; background: #fee500; border-color: #ead200; color: #352d13; font-size: 14px; }
+.alim-connection-status { color: #28684c; background: #eef7f0; border-radius: 8px; padding: 12px; font-size: 12px; }
+.alim-help { color: #797168; font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+.alim-help summary { cursor: pointer; margin-top: 16px; width: fit-content; }
+.alim-help code { font-size: 11px; color: #675039; }
+.alim-alert { border: 1px solid #efcebf; background: #fff3ec; padding: 14px 18px; border-radius: 10px; margin: 16px 0 24px; color: #8d4023; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+.alim-uncertain { margin-bottom: 24px; font-size: 13px; }
+.alim-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.alim-fields { margin: 0; padding: 0; border: 0; min-width: 0; }
+.alim-recipient { display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; margin-top: 20px; }
+.alim-optional { display: contents; font-weight: 400; color: #948b7e; }
+.alim-note { font-size: 12px; line-height: 1.8; color: #827a70; margin: 10px 0; }
+.alim-variables { margin-top: 24px; border-top: 1px solid #ede9e2; padding-top: 22px; }
+.alim-variables h3 span { font-size: 11px; color: #9b7942; margin-left: 5px; }
+.alim-variables .alim-field + .alim-field { margin-top: 14px; }
+.alim-mode { margin-top: 26px; }
+.alim-mode > label { display: flex; gap: 10px; align-items: center; border: 1px solid #e8e4dd; border-radius: 9px; padding: 14px 12px; margin-top: 9px; cursor: pointer; }
+.alim-mode > label.is-selected { border-color: #d8bb69; background: #fffcf0; }
+.alim-mode input { accent-color: #927120; }
+.alim-mode strong { font-size: 13px; display: block; }
+.alim-mode small { display: block; font-size: 11px; margin-top: 4px; color: #827a70; }
+.alim-center { text-align: center; margin-bottom: 0; }
+.alim-preview-column { min-width: 0; padding-top: 8px; }
+.alim-preview-heading { display: flex; align-items: center; justify-content: space-between; margin: 0 4px 14px; }
+.alim-preview-heading h2 { margin: 0; font-size: 14px; }
+.alim-preview-heading > span { color: #a1998c; font-size: 11px; }
+.alim-phone { padding: 24px 22px 18px; background: #e9e6dd; border: 1px solid #dcd7ca; border-radius: 18px; min-height: 365px; }
+.alim-chat-heading { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; margin-bottom: 22px; }
+.alim-chat-heading small { display: block; font-size: 10px; color: #8b8477; margin-top: 4px; font-weight: 400; }
+.alim-chat-icon { display: grid; place-items: center; width: 38px; height: 38px; background: #fee500; color: #423327; font-size: 26px; border-radius: 13px; }
+.alim-bubble { background: #fff; border-radius: 3px 12px 12px 12px; overflow: hidden; box-shadow: 0 2px 3px #473e2810; }
+.alim-bubble-label { background: #fee500; padding: 11px 17px; font-size: 12px; font-weight: 800; }
+.alim-bubble-content { padding: 18px; }
+.alim-message { margin: 0 0 16px; font-size: 13px; line-height: 1.85; white-space: pre-wrap; overflow-wrap: anywhere; }
+.alim-emphasis { display: block; font-size: 18px; margin-bottom: 16px; }
+.alim-preview-button { margin-top: 8px; border: 1px solid #e6e3de; border-radius: 5px; background: #fafaf8; text-align: center; padding: 10px; font-size: 12px; overflow-wrap: anywhere; }
+.alim-empty-preview { text-align: center; color: #9a9388; padding: 36px 12px; font-size: 13px; line-height: 1.8; }
+.alim-empty-preview > span { font-size: 26px; }
+.alim-preview-caption { font-size: 10px; text-align: center; color: #928978; margin-top: 18px; }
+.alim-link-details { padding: 0 4px; }
+.alim-link-details div { border-bottom: 1px solid #e6e2d9; padding: 12px 0; }
+.alim-results { margin-top: 28px; }
+.alim-result-receipt { border-radius: 10px; background: #f3f7ef; border: 1px solid #dde7d6; padding: 18px; margin: 16px 0 22px; }
+.alim-result-receipt > strong { font-size: 15px; color: #37602b; }
+.alim-result-receipt p { font-size: 12px; line-height: 1.8; }
+.alim-result-receipt dl { display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; }
+.alim-result-receipt dt { color: #818577; margin-bottom: 6px; }
+.alim-result-receipt dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+.alim-history-form { max-width: 580px; margin-top: 22px; }
+.alim-history { border-top: 1px solid #ece8df; margin-top: 20px; padding-top: 20px; font-size: 13px; overflow-wrap: anywhere; }
+.alim-history article { background: #f8f7f4; border-radius: 8px; padding: 14px; margin-top: 12px; }
+.alim-history p { font-size: 12px; }
+.alim-history small { color: #8a8175; line-height: 1.8; }
+.alim-footer { margin-top: 26px; text-align: center; font-size: 11px; color: #958d80; }
+.alim-footer a { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 720px) {
+  .alim-main { padding: 28px 16px; }
+  .alim-topbar { padding: 16px; }
+  .alim-brand { font-size: 20px; }
+  .alim-brand span { display: none; }
+  .alim-grid { grid-template-columns: 1fr; gap: 24px; }
+  .alim-card { padding: 20px; }
+  .alim-connect-form { flex-direction: column; align-items: stretch; }
+  .alim-recipient { grid-template-columns: 1fr; }
+  .alim-history-form { flex-direction: column; align-items: stretch; }
+  .alim-result-receipt dl { gap: 16px; }
+}

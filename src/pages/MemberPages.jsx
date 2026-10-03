@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import MobilePageShell from "../components/layout/MobilePageShell";
 import { allContent, getContentBySlug } from "../data/content";
 import {
   formatSubscriptionRange,
-  getMySubscriptionBySlug,
   getMySubscriptionCards,
 } from "../data/subscriptions";
 import {
@@ -13,8 +12,18 @@ import {
   getSubscriptionDayCount,
 } from "../data/dailyLessons";
 
+import { useSubscriptions } from "../hooks/useSubscriptions";
+
+function SubscriptionLoading({ loading, error, refresh }) {
+  return <MobilePageShell mainClassName="member-page"><div className="auth-status" role={error ? "alert" : "status"}>
+    {loading ? "구독 정보를 불러오고 있어요." : <><p>{error}</p><button className="signup-secondary-button" onClick={refresh}>다시 확인</button></>}
+  </div></MobilePageShell>;
+}
+
 export function SubscriptionPage() {
-  const subscriptions = getMySubscriptionCards();
+  const state = useSubscriptions();
+  const subscriptions = getMySubscriptionCards(state.subscriptions);
+  if (state.loading || state.error) return <SubscriptionLoading {...state} />;
 
   return (
     <MobilePageShell mainClassName="member-page subscription-list-page">
@@ -33,20 +42,21 @@ export function SubscriptionPage() {
         </section>
       ) : (
         <section className="subscription-list" aria-label="구독 목록">
-          <p className="subscription-list-count">구독중 {subscriptions.length}개</p>
+          <p className="subscription-list-count">내 구독 {subscriptions.length}개</p>
           <ul>
             {subscriptions.map((item) => (
               <li key={item.id}>
-                <Link className="subscription-list-card" to={`/subscriptions/${item.slug}`}>
+                <Link className="subscription-list-card" to={`/subscriptions/${item.slug}?subscriptionId=${item.id}`}>
                   <div className="subscription-list-cover">
                     <img src={item.content.image} alt="" />
                   </div>
                   <div className="subscription-list-body">
                     <div className="subscription-list-heading">
-                      <span>구독중</span>
+                      <span>{item.statusLabel}</span>
                       <small>{item.startDate.replaceAll("-", ".")}부터</small>
                     </div>
                     <h2>{item.content.title}</h2>
+                    {item.environment === "sandbox" && <small className="payment-test-badge">테스트 구독</small>}
                     <p>{item.content.description}</p>
                     <div className="subscription-list-meta">
                       <span>{item.sendTime}</span>
@@ -71,14 +81,18 @@ export function SubscriptionPage() {
 
 export function SubscriptionDetailPage() {
   const { slug } = useParams();
-  const subscription = getMySubscriptionBySlug(slug);
+  const [params] = useSearchParams();
+  const state = useSubscriptions();
+  if (state.loading || state.error) return <SubscriptionLoading {...state} />;
+  const matches = state.subscriptions.filter((item) => item.slug === slug);
+  const subscription = params.get("subscriptionId") ? matches.find((item) => item.id === params.get("subscriptionId")) : matches.find((item) => item.status === "active") || matches[0];
   const content = subscription ? getContentBySlug(subscription.slug) : null;
-
-  if (!subscription || !content) {
-    return <Navigate to="/subscriptions" replace />;
-  }
-
-  return <SubscriptionLearnView subscription={subscription} content={content} />;
+  if (!subscription || !content) return <Navigate to="/subscriptions" replace />;
+  if (subscription.status !== "active") return <MobilePageShell mainClassName="member-page"><section className="member-empty-state">
+    <h1>{content.title}</h1><p>{subscription.status === "scheduled" ? `${subscription.startDate}부터 학습을 시작할 수 있어요.` : subscription.status === "expired" ? "구독 이용 기간이 종료되었습니다." : "결제 상태를 확인 중입니다. 결제 내역을 확인해 주세요."}</p>
+    <Link to="/subscriptions">내 구독으로 돌아가기</Link>
+  </section></MobilePageShell>;
+  return <SubscriptionLearnView subscription={{ ...subscription, sendTime: `매일 ${subscription.delivery.time}` }} content={content} />;
 }
 
 function SubscriptionLearnView({ subscription, content }) {

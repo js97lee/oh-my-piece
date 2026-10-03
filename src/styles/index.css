@@ -7,3 +7,29 @@
 @import "../components/catalog/catalog.css";
 @import "../components/info/info.css";
 @import "../pages/pages.css";
+
+.auth-status { padding: 64px 24px; text-align: center; line-height: 1.7; }
+.auth-confirmation { margin: 24px auto; padding: 28px; max-width: 520px; border: 1px solid #e5e7eb; border-radius: 20px; background: #fff; line-height: 1.7; overflow-wrap: anywhere; }
+.auth-confirmation h2 { margin: 0 0 16px; font-size: 24px; }
+.auth-confirmation p { margin: 14px 0; }
+.auth-confirmation a { text-decoration: underline; }
+
+.purchase-fields { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 24px; }
+.payment-notice { padding: 15px 18px; margin: 0 0 22px; border: 1px solid #e9d19b; background: #fff8e6; border-radius: 12px; font-size: 14px; line-height: 1.65; color: #725514; }
+.payment-result-description { line-height: 1.8; margin: 18px 0; }
+.payment-detail-list { margin: 24px 0; padding: 20px; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; }
+.payment-detail-list > div { display: flex; justify-content: space-between; gap: 20px; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+.payment-detail-list > div:last-child { border-bottom: 0; }
+.payment-detail-list dt { color: #64748b; flex-shrink: 0; }
+.payment-detail-list dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+.payment-order-id { font-size: 12px; }
+.payment-result-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 24px 0; }
+.payment-result-actions .signup-button { flex: 1; text-align: center; }
+.payment-receipt-link, .payment-error a { text-decoration: underline; }
+.payment-history-list { list-style: none; padding: 0; display: grid; gap: 16px; }
+.payment-history-list > li { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 22px; }
+.payment-history-heading { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.payment-history-heading > span { color: #52664b; font-size: 14px; }
+.payment-history-list p { margin: 12px 0; }
+.payment-history-list a { display: block; margin-top: 16px; font-weight: 600; }
+.payment-test-badge { display: inline-block; width: fit-content; color: #725514; background: #fff8e6; padding: 3px 8px; border-radius: 6px; }

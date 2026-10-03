@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuthPreview } from "../../hooks/useAuthPreview";
+import { useAuth } from "../../context/AuthContext";
 import { addToCart } from "../../services/cart";
 
 export default function SubscribeFloatingBar({ content }) {
-  const isAuthenticated = useAuthPreview();
+  const { isAuthenticated } = useAuth();
   const [cartMessage, setCartMessage] = useState("");
   const purchasePath = `/contents/${content.slug}/purchase`;
   const destination = isAuthenticated ? purchasePath : `/login?returnTo=${encodeURIComponent(purchasePath)}`;

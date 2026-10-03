@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { memberMenuGroups } from "../../data/site";
 import { useCartCount } from "../../hooks/useCartCount";
-import { logoutAuth, useAuthPreview } from "../../hooks/useAuthPreview";
+import { useAuth } from "../../context/AuthContext";
 import { useDrawer } from "../../hooks/useDrawer";
 import { BrandLink } from "../brand/Brand";
 import SiteDrawer from "./SiteDrawer";
@@ -27,6 +27,9 @@ function SearchIcon() {
 }
 
 function MemberMenu() {
+  const { logout: signOut } = useAuth();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -51,9 +54,12 @@ function MemberMenu() {
     };
   }, [isOpen]);
 
-  const logout = () => {
-    logoutAuth();
-    setIsOpen(false);
+  const logout = async () => {
+    setBusy(true);
+    setError("");
+    try { await signOut(); setIsOpen(false); }
+    catch (failure) { setError(failure.message); }
+    finally { setBusy(false); }
   };
 
   return (
@@ -80,9 +86,10 @@ function MemberMenu() {
               </Link>
             )),
           )}
-          <button role="menuitem" type="button" className="header-account-logout" onClick={logout}>
+          <button role="menuitem" type="button" className="header-account-logout" onClick={logout} disabled={busy}>
             로그아웃
           </button>
+          {error && <p role="alert">{error}</p>}
         </div>
       ) : null}
     </div>
@@ -120,7 +127,7 @@ function HeaderSearch() {
 
 export default function SiteHeader() {
   const drawer = useDrawer();
-  const isAuthenticated = useAuthPreview();
+  const { isAuthenticated } = useAuth();
   const cartCount = useCartCount();
 
   return (

@@ -5,20 +5,7 @@ import mathHighImage from "../../assets/card-math-high.jpg";
 import mathMidImage from "../../assets/card-math-mid.jpg";
 import mathBasicImage from "../../assets/card-math-basic.jpg";
 
-const pricingByLevel = {
-  basic: {
-    totalPrice: "39,000원",
-    monthlyPrice: "월 3,250원",
-  },
-  middle: {
-    totalPrice: "59,000원",
-    monthlyPrice: "월 4,917원",
-  },
-  high: {
-    totalPrice: "79,000원",
-    monthlyPrice: "월 6,583원",
-  },
-};
+import { pricingByLevel } from "../../shared/commerce";
 
 export const contentSections = [
   {

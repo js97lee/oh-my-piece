@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
 import MobilePageShell from "../components/layout/MobilePageShell";
-import { logoutAuth, useAuthPreview } from "../hooks/useAuthPreview";
-import { getKakaoSession, syncKakaoProfile } from "../services/kakaoAuth";
-import { getLocalMember } from "../services/localAuth";
+import { useAuth } from "../context/AuthContext";
 
 const SUBJECT_LABELS = {
   english: "영어",
@@ -78,52 +75,18 @@ function formatOptionalSummary(profile) {
 }
 
 export default function AccountPage() {
-  const isAuthenticated = useAuthPreview();
-  const navigate = useNavigate();
-  const [kakaoSession, setKakaoSession] = useState(() => getKakaoSession());
-  const localMember = getLocalMember();
-  const isKakaoMember = Boolean(kakaoSession?.accessToken);
-  const [isSyncing, setIsSyncing] = useState(false);
+  const { user, logout } = useAuth();
   const [message, setMessage] = useState("");
-
-  if (!isAuthenticated) {
-    return <Navigate to="/mypage?returnTo=/account" replace />;
-  }
-
-  const profile = isKakaoMember ? kakaoSession?.profile || {} : localMember?.profile || {};
-  const connectedAt = isKakaoMember ? kakaoSession?.connectedAt : localMember?.connectedAt;
-
-  const handleSync = async () => {
-    if (!isKakaoMember) {
-      setMessage("일반 회원은 동기화가 필요하지 않아요.");
-      return;
-    }
-
-    setIsSyncing(true);
+  const [busy, setBusy] = useState(false);
+  const isKakaoMember = user.provider === "kakao";
+  const profile = user.profile;
+  const connectedAt = user.createdAt;
+  const handleLogout = async () => {
+    setBusy(true);
     setMessage("");
-    try {
-      await syncKakaoProfile();
-      setKakaoSession(getKakaoSession());
-      setMessage("계정 정보를 동기화했어요.");
-    } catch (error) {
-      setMessage(error.message || "동기화에 실패했습니다.");
-    } finally {
-      setIsSyncing(false);
-    }
-  };
-
-  const handleLogout = () => {
-    logoutAuth();
-    navigate("/", { replace: true });
-  };
-
-  const handleWithdraw = () => {
-    const confirmed = window.confirm("정말 탈퇴하시겠어요?\n계정 연결이 해제되고 이 기기의 로그인 정보가 삭제됩니다.");
-    if (!confirmed) {
-      return;
-    }
-    logoutAuth();
-    navigate("/", { replace: true });
+    try { await logout(); }
+    catch (error) { setMessage(error.message); }
+    finally { setBusy(false); }
   };
 
   return (
@@ -138,16 +101,10 @@ export default function AccountPage() {
             <h2>{isKakaoMember ? "메신저" : "가입 방식"}</h2>
             <p>
               {isKakaoMember
-                ? "콘텐츠를 받을 메신저 연결 상태입니다."
-                : "이메일·전화번호로 가입한 일반 회원입니다."}
+                ? "카카오 계정으로 가입한 회원입니다."
+                : "이메일로 가입한 회원입니다."}
             </p>
           </div>
-          {isKakaoMember ? (
-            <button className="account-sync-button" type="button" onClick={handleSync} disabled={isSyncing}>
-              <span aria-hidden="true">↻</span>
-              {isSyncing ? "동기화 중" : "동기화"}
-            </button>
-          ) : null}
         </div>
         <article className="account-card account-messenger-card">
           <div className="account-messenger-main">
@@ -198,7 +155,7 @@ export default function AccountPage() {
             <strong>{profile.email || "미제공"}</strong>
           </div>
           <div>
-            <span>전화번호</span>
+            <span>연락처 (미인증)</span>
             <strong>{profile.phoneNumber || "미제공"}</strong>
           </div>
           {!isKakaoMember ? (
@@ -208,14 +165,13 @@ export default function AccountPage() {
             </div>
           ) : null}
         </article>
-        {message ? <p className="account-message">{message}</p> : null}
+        {message ? <p className="account-message" role="status">{message}</p> : null}
       </section>
 
       <section className="account-section account-danger-section">
         <div className="account-section-head">
           <div>
-            <h2>위험구역</h2>
-            <p>되돌릴 수 없는 작업입니다. 신중하게 진행하세요</p>
+            <h2>로그인 관리</h2>
           </div>
         </div>
         <article className="account-card account-action-card">
@@ -223,17 +179,8 @@ export default function AccountPage() {
             <strong>로그아웃</strong>
             <p>현재 기기에서 로그아웃합니다.</p>
           </div>
-          <button className="account-button account-button--ghost" type="button" onClick={handleLogout}>
+          <button className="account-button account-button--ghost" type="button" onClick={handleLogout} disabled={busy}>
             로그아웃
-          </button>
-        </article>
-        <article className="account-card account-action-card">
-          <div>
-            <strong>회원 탈퇴</strong>
-            <p>계정을 삭제하고 모든 데이터를 영구적으로 제거합니다.</p>
-          </div>
-          <button className="account-button account-button--danger" type="button" onClick={handleWithdraw}>
-            탈퇴하기
           </button>
         </article>
       </section>
